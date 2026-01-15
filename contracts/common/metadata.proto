@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package common;
+
+//option go_package = "contracts/common;common";
+
+option go_package = "github.com/kamogelosekhukhune777/real-time-supply-chain/pkg/common;common";
+
+message EventMetadata {
+  string event_id = 1;
+  string event_type = 2;
+  int64 occurred_at = 3; // unix millis
+  string producer = 4;
+  string tenant_id = 5;
+  int32 schema_version = 6;
+}

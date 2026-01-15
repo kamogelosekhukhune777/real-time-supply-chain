@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package inventory;
+
+import "contracts/common/metadata.proto";
+
+//option go_package = "contracts/inventory;inventory";
+option go_package = "github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/domain/gen;inventory";
+
+message InventoryUpdated {
+  common.EventMetadata metadata = 1;
+
+  string warehouse_id = 2;
+  string sku = 3;
+  int32 quantity_available = 4;
+  int32 quantity_reserved = 5;
+}
+
+message InventoryLowStock {
+  common.EventMetadata metadata = 1;
+
+  string warehouse_id = 2;
+  string sku = 3;
+  int32 quantity_available = 4;
+  int32 threshold = 5;
+}
