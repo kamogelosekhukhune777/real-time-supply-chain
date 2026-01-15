@@ -49,7 +49,7 @@ secrets.yaml
 Thumbs.db
 
 #Text file
-.*txt
+*.txt
 
 
 #frontend
