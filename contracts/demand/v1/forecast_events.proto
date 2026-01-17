@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package demand.v1;
+
+import "common/v1/metadata.proto";
+
+option go_package = "contracts/demand/v1;demand";
+
+message DemandForecastUpdated {
+  common.v1.EventMetadata metadata = 1;
+
+  string location_id = 2; // store or warehouse
+  string sku = 3;
+  int32 forecast_horizon_hours = 4;
+  int32 predicted_demand = 5;
+
+  enum RiskLevel {
+    UNKNOWN = 0;
+    LOW = 1;
+    MEDIUM = 2;
+    HIGH = 3;
+  }
+
+  RiskLevel risk = 6;
+}

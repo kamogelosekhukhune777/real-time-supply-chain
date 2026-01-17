@@ -1,12 +1,28 @@
+# Define dependencies
 
+BASE_MODULE     := github.com/kamogelosekhukhune777/real-time-supply-chain
 
+# ============================================================================================================================================
+#Code gen(s)
 
+generate: generate-inventory-v1
+
+generate-inventory-v1:
+	protoc \
+	  --proto_path=. \
+	  --go_out=services/inventory/internal/service/events \
+	  --go_opt=module=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events \
+	  --go_opt=Mcontracts/common/v1/metadata.proto=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events/common/v1 \
+	  --go_opt=Mcontracts/inventory/v1/inventory_events.proto=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events/inventory/v1 \
+	  --go_opt=Mcontracts/sales/v1/sale_events.proto=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events/sales/v1 \
+	  --go_opt=Mcontracts/shipment/v1/shipment_events.proto=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events/shipment/v1 \
+	  contracts/common/v1/metadata.proto \
+	  contracts/inventory/v1/inventory_events.proto \
+	  contracts/sales/v1/sale_events.proto \
+	  contracts/shipment/v1/shipment_events.proto
 
 # ============================================================================================================================================
 # Docker Compose
-
-# ============================================================================================================================================
-# Modules support
 
 compose-up:
 	cd ./zarf/compose/ && docker compose -f docker_compose.yaml -p compose up -d
@@ -34,29 +50,7 @@ compose-ps-v:
 # ============================================================================================================================================
 # Hitting endpoints
 
-# ============================================================================================================================================
-#Code gen(s)
 
-some:
-	protoc --proto_path=. \
-	       --proto_path=contracts \
-	       --go_out=services/inventory/internal/domain/gen \
-	       --go_opt=paths=source_relative \
-	       contracts/inventory/inventory_events.proto
-
-some2:
-	protoc --proto_path=. \
-	       --proto_path=contracts \
-	       --go_out=services/inventory/internal/domain/gen \
-	       --go_opt=module=github.com/kamogelosekhukhune777/real-time-supply-chain \
-	       contracts/inventory/inventory_events.proto
-
-generate:
-	protoc --proto_path=. \
-	       --go_out=. \
-	       --go_opt=module=github.com/kamogelosekhukhune777/real-time-supply-chain \
-	       contracts/common/metadata.proto \
-	       contracts/inventory/inventory_events.proto
 
 # ============================================================================================================================================
 # Modules support

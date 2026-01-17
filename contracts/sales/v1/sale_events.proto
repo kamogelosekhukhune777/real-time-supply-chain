@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package sales.v1;
+
+import "contracts/common/v1/metadata.proto";
+
+option go_package = "contracts/sales/v1;sales";
+
+message SaleCompleted {
+  common.v1.EventMetadata metadata = 1;
+
+  string sale_id = 2;
+  string store_id = 3;
+  string sku = 4;
+  int32 quantity = 5;
+}

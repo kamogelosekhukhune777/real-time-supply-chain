@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package inventory.v1;
+
+import "contracts/common/v1/metadata.proto";
+
+option go_package = "contracts/inventory/v1;inventory";
+
+//Emitted whenever inventory quantities change
+message InventoryUpdated {
+  common.v1.EventMetadata metadata = 1;
+
+  string warehouse_id = 2;
+  string sku = 3;
+
+  int32 quantity_available = 4;
+  int32 quantity_reserved = 5;
+  int32 quantity_incoming = 6;
+
+  enum UpdateReason {
+    UPDATE_REASON_UNSPECIFIED = 0;
+    ORDER_PLACED = 1;
+    ORDER_CANCELLED = 2;
+    SHIPMENT_RECEIVED = 3;
+    SHIPMENT_DISPATCHED = 4;
+    REALLOCATION = 5;
+    MANUAL_ADJUSTMENT = 6;
+  }
+
+  UpdateReason reason = 7;
+}
+
+//Emitted when available stock drops below configured threshold
+message InventoryLowStock {
+  common.v1.EventMetadata metadata = 1;
+
+  string warehouse_id = 2;
+  string sku = 3;
+
+  int32 quantity_available = 4;
+  int32 threshold = 5;
+
+  enum Severity {
+    SEVERITY_UNSPECIFIED = 0;
+    WARNING = 1;
+    CRITICAL = 2;
+  }
+
+  Severity severity = 6;
+}
+
+//Emitted when available stock reaches zero
+message InventoryOutOfStock {
+  common.v1.EventMetadata metadata = 1;
+
+  string warehouse_id = 2;
+  string sku = 3;
+}
+
+//Emitted when stock is reserved for an order
+message InventoryReserved {
+  common.v1.EventMetadata metadata = 1;
+
+  string warehouse_id = 2;
+  string sku = 3;
+
+  string reservation_id = 4;
+  string order_id = 5;
+
+  int32 reserved_quantity = 6;
+
+  int32 quantity_available_after = 7;
+  int32 quantity_reserved_after = 8;
+}
+
+//Emitted when a reservation is released (cancelled / expired)
+message InventoryReservationReleased {
+  common.v1.EventMetadata metadata = 1;
+
+  string warehouse_id = 2;
+  string sku = 3;
+
+  string reservation_id = 4;
+  string order_id = 5;
+
+  int32 released_quantity = 6;
+
+  int32 quantity_available_after = 7;
+  int32 quantity_reserved_after = 8;
+
+  enum ReleaseReason {
+    RELEASE_REASON_UNSPECIFIED = 0;
+    ORDER_CANCELLED = 1;
+    PAYMENT_FAILED = 2;
+    RESERVATION_EXPIRED = 3;
+  }
+
+  ReleaseReason reason = 9;
+}
+
+// Emitted when inventory is reallocated between warehouses
+message InventoryReallocated {
+  common.v1.EventMetadata metadata = 1;
+
+  string sku = 2;
+
+  string from_warehouse_id = 3;
+  string to_warehouse_id = 4;
+
+  int32 quantity = 5;
+
+  enum ReallocationReason {
+    REALLOCATION_REASON_UNSPECIFIED = 0;
+    DEMAND_SPIKE = 1;
+    OPTIMIZATION_DECISION = 2;
+    MANUAL_OVERRIDE = 3;
+  }
+
+  ReallocationReason reason = 6;
+}

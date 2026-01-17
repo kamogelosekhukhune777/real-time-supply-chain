@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package optimization.v1;
+
+import "common/v1/metadata.proto";
+
+option go_package = "contracts/optimization.v1;optimization";
+
+enum DecisionType {
+  DECISION_TYPE_UNSPECIFIED = 0;
+  REALLOCATE_STOCK = 1;
+  REROUTE_SHIPMENT = 2;
+}
+
+message OptimizationDecisionCreated {
+  common.v1.EventMetadata metadata = 1;
+
+  string decision_id = 2;
+  DecisionType type = 3;
+
+  string reason = 4;
+  float confidence = 5;
+
+  string affected_entity_id = 6; // shipment_id or warehouse_id
+}

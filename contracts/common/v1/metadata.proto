@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package common.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "contracts/common/v1;common";
+
+message EventMetadata {
+  string event_id = 1;
+  string event_type = 2;
+  google.protobuf.Timestamp occurred_at = 3;
+  string producer = 4;
+  string tenant_id = 5;
+  int32 schema_version = 6;
+}

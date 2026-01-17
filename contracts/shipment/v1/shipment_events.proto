@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package shipment.v1;
+
+import "contracts/common/v1/metadata.proto";
+
+option go_package = "contracts/shipment/v1;shipment";
+
+message ShipmentCreated {
+  common.v1.EventMetadata metadata = 1;
+
+  string shipment_id = 2;
+  string origin_warehouse_id = 3;
+  string destination_id = 4;
+  int64 expected_delivery_time = 5;
+}
+
+message ShipmentArrived {
+  common.v1.EventMetadata metadata = 1;
+
+  string shipment_id = 2;
+  string destination_id = 3;
+  string sku = 4;
+  int32 quantity = 5;
+  int64 occurred_at = 6;
+}
+
+message ShipmentCancelled {
+  common.v1.EventMetadata metadata = 1;
+
+  string shipment_id = 2;
+  string destination_id = 3;
+  string sku = 4;
+  int32 quantity = 5;
+  int64 occurred_at = 6;
+}
+
+message ShipmentLocationUpdated {
+  common.v1.EventMetadata metadata = 1;
+
+  string shipment_id = 2;
+  double latitude = 3;
+  double longitude = 4;
+}
+
+message ShipmentDelayed {
+  common.v1.EventMetadata metadata = 1;
+
+  string shipment_id = 2;
+  int32 delay_minutes = 3;
+  string reason = 4;
+}
