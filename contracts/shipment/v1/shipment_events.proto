@@ -50,3 +50,36 @@ message ShipmentDelayed {
   int32 delay_minutes = 3;
   string reason = 4;
 }
+
+//====================================================================================================
+
+// Shipment picked up from warehouse
+message ShipmentPickedUp {
+  common.v1.EventMetadata metadata = 1;
+
+  string shipment_id = 2;
+  string origin_warehouse_id = 3;
+}
+
+// Shipment actively in transit
+message ShipmentInTransit {
+  common.v1.EventMetadata metadata = 1;
+
+  string shipment_id = 2;
+}
+
+// Shipment delivered successfully
+message ShipmentDelivered {
+  common.v1.EventMetadata metadata = 1;
+
+  string shipment_id = 2;
+  string destination_id = 3;
+}
+
+// Shipment returned to origin
+message ShipmentReturned {
+  common.v1.EventMetadata metadata = 1;
+
+  string shipment_id = 2;
+  string origin_warehouse_id = 3;
+}

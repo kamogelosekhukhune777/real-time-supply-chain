@@ -14,3 +14,21 @@ message SaleCompleted {
   string sku = 4;
   int32 quantity = 5;
 }
+
+//====================================================================================================
+
+// Sale initiated (optional, for reservation)
+message SaleStarted {
+  common.v1.EventMetadata metadata = 1;
+
+  string sale_id = 2;
+  string store_id = 3;
+}
+
+// Sale refunded → restore inventory
+message SaleRefunded {
+  common.v1.EventMetadata metadata = 1;
+
+  string sale_id = 2;
+  string store_id = 3;
+}

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package demand.v1;
 
-import "common/v1/metadata.proto";
+import "contracts/common/v1/metadata.proto";
 
 option go_package = "contracts/demand/v1;demand";
 
@@ -22,4 +22,18 @@ message DemandForecastUpdated {
   }
 
   RiskLevel risk = 6;
+}
+
+//emitted when demand exceeds normal variance
+message DemandSpikeDetected {
+  common.v1.EventMetadata metadata = 1;
+  string location_id = 2;
+  string sku = 3;
+}
+
+// emitted when demand implies replenishment
+message DemandReorderTriggered {
+  common.v1.EventMetadata metadata = 1;
+  string location_id = 2;
+  string sku = 3;
 }

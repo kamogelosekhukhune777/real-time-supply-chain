@@ -98,6 +98,128 @@ func (x *SaleCompleted) GetQuantity() int32 {
 	return 0
 }
 
+// Sale initiated (optional, for reservation)
+type SaleStarted struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	SaleId        string                 `protobuf:"bytes,2,opt,name=sale_id,json=saleId,proto3" json:"sale_id,omitempty"`
+	StoreId       string                 `protobuf:"bytes,3,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SaleStarted) Reset() {
+	*x = SaleStarted{}
+	mi := &file_contracts_sales_v1_sale_events_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SaleStarted) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SaleStarted) ProtoMessage() {}
+
+func (x *SaleStarted) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_sales_v1_sale_events_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SaleStarted.ProtoReflect.Descriptor instead.
+func (*SaleStarted) Descriptor() ([]byte, []int) {
+	return file_contracts_sales_v1_sale_events_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SaleStarted) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *SaleStarted) GetSaleId() string {
+	if x != nil {
+		return x.SaleId
+	}
+	return ""
+}
+
+func (x *SaleStarted) GetStoreId() string {
+	if x != nil {
+		return x.StoreId
+	}
+	return ""
+}
+
+// Sale refunded → restore inventory
+type SaleRefunded struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	SaleId        string                 `protobuf:"bytes,2,opt,name=sale_id,json=saleId,proto3" json:"sale_id,omitempty"`
+	StoreId       string                 `protobuf:"bytes,3,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SaleRefunded) Reset() {
+	*x = SaleRefunded{}
+	mi := &file_contracts_sales_v1_sale_events_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SaleRefunded) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SaleRefunded) ProtoMessage() {}
+
+func (x *SaleRefunded) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_sales_v1_sale_events_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SaleRefunded.ProtoReflect.Descriptor instead.
+func (*SaleRefunded) Descriptor() ([]byte, []int) {
+	return file_contracts_sales_v1_sale_events_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SaleRefunded) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *SaleRefunded) GetSaleId() string {
+	if x != nil {
+		return x.SaleId
+	}
+	return ""
+}
+
+func (x *SaleRefunded) GetStoreId() string {
+	if x != nil {
+		return x.StoreId
+	}
+	return ""
+}
+
 var File_contracts_sales_v1_sale_events_proto protoreflect.FileDescriptor
 
 const file_contracts_sales_v1_sale_events_proto_rawDesc = "" +
@@ -108,7 +230,15 @@ const file_contracts_sales_v1_sale_events_proto_rawDesc = "" +
 	"\asale_id\x18\x02 \x01(\tR\x06saleId\x12\x19\n" +
 	"\bstore_id\x18\x03 \x01(\tR\astoreId\x12\x10\n" +
 	"\x03sku\x18\x04 \x01(\tR\x03sku\x12\x1a\n" +
-	"\bquantity\x18\x05 \x01(\x05R\bquantityB\x1aZ\x18contracts/sales/v1;salesb\x06proto3"
+	"\bquantity\x18\x05 \x01(\x05R\bquantity\"w\n" +
+	"\vSaleStarted\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x17\n" +
+	"\asale_id\x18\x02 \x01(\tR\x06saleId\x12\x19\n" +
+	"\bstore_id\x18\x03 \x01(\tR\astoreId\"x\n" +
+	"\fSaleRefunded\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x17\n" +
+	"\asale_id\x18\x02 \x01(\tR\x06saleId\x12\x19\n" +
+	"\bstore_id\x18\x03 \x01(\tR\astoreIdB\x1aZ\x18contracts/sales/v1;salesb\x06proto3"
 
 var (
 	file_contracts_sales_v1_sale_events_proto_rawDescOnce sync.Once
@@ -122,18 +252,22 @@ func file_contracts_sales_v1_sale_events_proto_rawDescGZIP() []byte {
 	return file_contracts_sales_v1_sale_events_proto_rawDescData
 }
 
-var file_contracts_sales_v1_sale_events_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_contracts_sales_v1_sale_events_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_contracts_sales_v1_sale_events_proto_goTypes = []any{
 	(*SaleCompleted)(nil),    // 0: sales.v1.SaleCompleted
-	(*v1.EventMetadata)(nil), // 1: common.v1.EventMetadata
+	(*SaleStarted)(nil),      // 1: sales.v1.SaleStarted
+	(*SaleRefunded)(nil),     // 2: sales.v1.SaleRefunded
+	(*v1.EventMetadata)(nil), // 3: common.v1.EventMetadata
 }
 var file_contracts_sales_v1_sale_events_proto_depIdxs = []int32{
-	1, // 0: sales.v1.SaleCompleted.metadata:type_name -> common.v1.EventMetadata
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3, // 0: sales.v1.SaleCompleted.metadata:type_name -> common.v1.EventMetadata
+	3, // 1: sales.v1.SaleStarted.metadata:type_name -> common.v1.EventMetadata
+	3, // 2: sales.v1.SaleRefunded.metadata:type_name -> common.v1.EventMetadata
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_contracts_sales_v1_sale_events_proto_init() }
@@ -147,7 +281,7 @@ func file_contracts_sales_v1_sale_events_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_sales_v1_sale_events_proto_rawDesc), len(file_contracts_sales_v1_sale_events_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

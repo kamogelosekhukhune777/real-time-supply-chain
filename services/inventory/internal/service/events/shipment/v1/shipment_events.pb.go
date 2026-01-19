@@ -402,6 +402,242 @@ func (x *ShipmentDelayed) GetReason() string {
 	return ""
 }
 
+// Shipment picked up from warehouse
+type ShipmentPickedUp struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Metadata          *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	ShipmentId        string                 `protobuf:"bytes,2,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
+	OriginWarehouseId string                 `protobuf:"bytes,3,opt,name=origin_warehouse_id,json=originWarehouseId,proto3" json:"origin_warehouse_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *ShipmentPickedUp) Reset() {
+	*x = ShipmentPickedUp{}
+	mi := &file_contracts_shipment_v1_shipment_events_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShipmentPickedUp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShipmentPickedUp) ProtoMessage() {}
+
+func (x *ShipmentPickedUp) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_shipment_v1_shipment_events_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShipmentPickedUp.ProtoReflect.Descriptor instead.
+func (*ShipmentPickedUp) Descriptor() ([]byte, []int) {
+	return file_contracts_shipment_v1_shipment_events_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ShipmentPickedUp) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *ShipmentPickedUp) GetShipmentId() string {
+	if x != nil {
+		return x.ShipmentId
+	}
+	return ""
+}
+
+func (x *ShipmentPickedUp) GetOriginWarehouseId() string {
+	if x != nil {
+		return x.OriginWarehouseId
+	}
+	return ""
+}
+
+// Shipment actively in transit
+type ShipmentInTransit struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	ShipmentId    string                 `protobuf:"bytes,2,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShipmentInTransit) Reset() {
+	*x = ShipmentInTransit{}
+	mi := &file_contracts_shipment_v1_shipment_events_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShipmentInTransit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShipmentInTransit) ProtoMessage() {}
+
+func (x *ShipmentInTransit) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_shipment_v1_shipment_events_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShipmentInTransit.ProtoReflect.Descriptor instead.
+func (*ShipmentInTransit) Descriptor() ([]byte, []int) {
+	return file_contracts_shipment_v1_shipment_events_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ShipmentInTransit) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *ShipmentInTransit) GetShipmentId() string {
+	if x != nil {
+		return x.ShipmentId
+	}
+	return ""
+}
+
+// Shipment delivered successfully
+type ShipmentDelivered struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	ShipmentId    string                 `protobuf:"bytes,2,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
+	DestinationId string                 `protobuf:"bytes,3,opt,name=destination_id,json=destinationId,proto3" json:"destination_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShipmentDelivered) Reset() {
+	*x = ShipmentDelivered{}
+	mi := &file_contracts_shipment_v1_shipment_events_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShipmentDelivered) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShipmentDelivered) ProtoMessage() {}
+
+func (x *ShipmentDelivered) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_shipment_v1_shipment_events_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShipmentDelivered.ProtoReflect.Descriptor instead.
+func (*ShipmentDelivered) Descriptor() ([]byte, []int) {
+	return file_contracts_shipment_v1_shipment_events_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ShipmentDelivered) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *ShipmentDelivered) GetShipmentId() string {
+	if x != nil {
+		return x.ShipmentId
+	}
+	return ""
+}
+
+func (x *ShipmentDelivered) GetDestinationId() string {
+	if x != nil {
+		return x.DestinationId
+	}
+	return ""
+}
+
+// Shipment returned to origin
+type ShipmentReturned struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Metadata          *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	ShipmentId        string                 `protobuf:"bytes,2,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
+	OriginWarehouseId string                 `protobuf:"bytes,3,opt,name=origin_warehouse_id,json=originWarehouseId,proto3" json:"origin_warehouse_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *ShipmentReturned) Reset() {
+	*x = ShipmentReturned{}
+	mi := &file_contracts_shipment_v1_shipment_events_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShipmentReturned) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShipmentReturned) ProtoMessage() {}
+
+func (x *ShipmentReturned) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_shipment_v1_shipment_events_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShipmentReturned.ProtoReflect.Descriptor instead.
+func (*ShipmentReturned) Descriptor() ([]byte, []int) {
+	return file_contracts_shipment_v1_shipment_events_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ShipmentReturned) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *ShipmentReturned) GetShipmentId() string {
+	if x != nil {
+		return x.ShipmentId
+	}
+	return ""
+}
+
+func (x *ShipmentReturned) GetOriginWarehouseId() string {
+	if x != nil {
+		return x.OriginWarehouseId
+	}
+	return ""
+}
+
 var File_contracts_shipment_v1_shipment_events_proto protoreflect.FileDescriptor
 
 const file_contracts_shipment_v1_shipment_events_proto_rawDesc = "" +
@@ -443,7 +679,26 @@ const file_contracts_shipment_v1_shipment_events_proto_rawDesc = "" +
 	"\vshipment_id\x18\x02 \x01(\tR\n" +
 	"shipmentId\x12#\n" +
 	"\rdelay_minutes\x18\x03 \x01(\x05R\fdelayMinutes\x12\x16\n" +
-	"\x06reason\x18\x04 \x01(\tR\x06reasonB Z\x1econtracts/shipment/v1;shipmentb\x06proto3"
+	"\x06reason\x18\x04 \x01(\tR\x06reason\"\x99\x01\n" +
+	"\x10ShipmentPickedUp\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
+	"\vshipment_id\x18\x02 \x01(\tR\n" +
+	"shipmentId\x12.\n" +
+	"\x13origin_warehouse_id\x18\x03 \x01(\tR\x11originWarehouseId\"j\n" +
+	"\x11ShipmentInTransit\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
+	"\vshipment_id\x18\x02 \x01(\tR\n" +
+	"shipmentId\"\x91\x01\n" +
+	"\x11ShipmentDelivered\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
+	"\vshipment_id\x18\x02 \x01(\tR\n" +
+	"shipmentId\x12%\n" +
+	"\x0edestination_id\x18\x03 \x01(\tR\rdestinationId\"\x99\x01\n" +
+	"\x10ShipmentReturned\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
+	"\vshipment_id\x18\x02 \x01(\tR\n" +
+	"shipmentId\x12.\n" +
+	"\x13origin_warehouse_id\x18\x03 \x01(\tR\x11originWarehouseIdB Z\x1econtracts/shipment/v1;shipmentb\x06proto3"
 
 var (
 	file_contracts_shipment_v1_shipment_events_proto_rawDescOnce sync.Once
@@ -457,26 +712,34 @@ func file_contracts_shipment_v1_shipment_events_proto_rawDescGZIP() []byte {
 	return file_contracts_shipment_v1_shipment_events_proto_rawDescData
 }
 
-var file_contracts_shipment_v1_shipment_events_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_contracts_shipment_v1_shipment_events_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_contracts_shipment_v1_shipment_events_proto_goTypes = []any{
 	(*ShipmentCreated)(nil),         // 0: shipment.v1.ShipmentCreated
 	(*ShipmentArrived)(nil),         // 1: shipment.v1.ShipmentArrived
 	(*ShipmentCancelled)(nil),       // 2: shipment.v1.ShipmentCancelled
 	(*ShipmentLocationUpdated)(nil), // 3: shipment.v1.ShipmentLocationUpdated
 	(*ShipmentDelayed)(nil),         // 4: shipment.v1.ShipmentDelayed
-	(*v1.EventMetadata)(nil),        // 5: common.v1.EventMetadata
+	(*ShipmentPickedUp)(nil),        // 5: shipment.v1.ShipmentPickedUp
+	(*ShipmentInTransit)(nil),       // 6: shipment.v1.ShipmentInTransit
+	(*ShipmentDelivered)(nil),       // 7: shipment.v1.ShipmentDelivered
+	(*ShipmentReturned)(nil),        // 8: shipment.v1.ShipmentReturned
+	(*v1.EventMetadata)(nil),        // 9: common.v1.EventMetadata
 }
 var file_contracts_shipment_v1_shipment_events_proto_depIdxs = []int32{
-	5, // 0: shipment.v1.ShipmentCreated.metadata:type_name -> common.v1.EventMetadata
-	5, // 1: shipment.v1.ShipmentArrived.metadata:type_name -> common.v1.EventMetadata
-	5, // 2: shipment.v1.ShipmentCancelled.metadata:type_name -> common.v1.EventMetadata
-	5, // 3: shipment.v1.ShipmentLocationUpdated.metadata:type_name -> common.v1.EventMetadata
-	5, // 4: shipment.v1.ShipmentDelayed.metadata:type_name -> common.v1.EventMetadata
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	9, // 0: shipment.v1.ShipmentCreated.metadata:type_name -> common.v1.EventMetadata
+	9, // 1: shipment.v1.ShipmentArrived.metadata:type_name -> common.v1.EventMetadata
+	9, // 2: shipment.v1.ShipmentCancelled.metadata:type_name -> common.v1.EventMetadata
+	9, // 3: shipment.v1.ShipmentLocationUpdated.metadata:type_name -> common.v1.EventMetadata
+	9, // 4: shipment.v1.ShipmentDelayed.metadata:type_name -> common.v1.EventMetadata
+	9, // 5: shipment.v1.ShipmentPickedUp.metadata:type_name -> common.v1.EventMetadata
+	9, // 6: shipment.v1.ShipmentInTransit.metadata:type_name -> common.v1.EventMetadata
+	9, // 7: shipment.v1.ShipmentDelivered.metadata:type_name -> common.v1.EventMetadata
+	9, // 8: shipment.v1.ShipmentReturned.metadata:type_name -> common.v1.EventMetadata
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_contracts_shipment_v1_shipment_events_proto_init() }
@@ -490,7 +753,7 @@ func file_contracts_shipment_v1_shipment_events_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_shipment_v1_shipment_events_proto_rawDesc), len(file_contracts_shipment_v1_shipment_events_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package optimization.v1;
 
-import "common/v1/metadata.proto";
+import "contracts/common/v1/metadata.proto";
 
-option go_package = "contracts/optimization.v1;optimization";
+option go_package = "contracts/optimization/v1;optimization";
 
 enum DecisionType {
   DECISION_TYPE_UNSPECIFIED = 0;
@@ -22,4 +22,20 @@ message OptimizationDecisionCreated {
   float confidence = 5;
 
   string affected_entity_id = 6; // shipment_id or warehouse_id
+}
+
+//====================================================================================================
+
+// decision successfully applied
+message OptimizationDecisionExecuted {
+  common.v1.EventMetadata metadata = 1;
+  string decision_id = 2;
+  DecisionType type = 3;
+}
+
+// decision rejected or failed
+message OptimizationDecisionFailed {
+  common.v1.EventMetadata metadata = 1;
+  string decision_id = 2;
+  DecisionType type = 3;
 }

@@ -770,6 +770,326 @@ func (x *InventoryReallocated) GetReason() InventoryReallocated_ReallocationReas
 	return InventoryReallocated_REALLOCATION_REASON_UNSPECIFIED
 }
 
+// reservation attempt failed
+type InventoryReservationFailed struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	WarehouseId   string                 `protobuf:"bytes,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Sku           string                 `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InventoryReservationFailed) Reset() {
+	*x = InventoryReservationFailed{}
+	mi := &file_contracts_inventory_v1_inventory_events_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InventoryReservationFailed) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InventoryReservationFailed) ProtoMessage() {}
+
+func (x *InventoryReservationFailed) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_inventory_v1_inventory_events_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InventoryReservationFailed.ProtoReflect.Descriptor instead.
+func (*InventoryReservationFailed) Descriptor() ([]byte, []int) {
+	return file_contracts_inventory_v1_inventory_events_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *InventoryReservationFailed) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *InventoryReservationFailed) GetWarehouseId() string {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return ""
+}
+
+func (x *InventoryReservationFailed) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+// inventory shortage detected
+type InventoryShortageDetected struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	WarehouseId   string                 `protobuf:"bytes,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Sku           string                 `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InventoryShortageDetected) Reset() {
+	*x = InventoryShortageDetected{}
+	mi := &file_contracts_inventory_v1_inventory_events_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InventoryShortageDetected) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InventoryShortageDetected) ProtoMessage() {}
+
+func (x *InventoryShortageDetected) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_inventory_v1_inventory_events_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InventoryShortageDetected.ProtoReflect.Descriptor instead.
+func (*InventoryShortageDetected) Descriptor() ([]byte, []int) {
+	return file_contracts_inventory_v1_inventory_events_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *InventoryShortageDetected) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *InventoryShortageDetected) GetWarehouseId() string {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return ""
+}
+
+func (x *InventoryShortageDetected) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+// transfer lifecycle (important for shipment + optimization)
+type InventoryTransferStarted struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Metadata        *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Sku             string                 `protobuf:"bytes,2,opt,name=sku,proto3" json:"sku,omitempty"`
+	FromWarehouseId string                 `protobuf:"bytes,3,opt,name=from_warehouse_id,json=fromWarehouseId,proto3" json:"from_warehouse_id,omitempty"`
+	ToWarehouseId   string                 `protobuf:"bytes,4,opt,name=to_warehouse_id,json=toWarehouseId,proto3" json:"to_warehouse_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *InventoryTransferStarted) Reset() {
+	*x = InventoryTransferStarted{}
+	mi := &file_contracts_inventory_v1_inventory_events_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InventoryTransferStarted) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InventoryTransferStarted) ProtoMessage() {}
+
+func (x *InventoryTransferStarted) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_inventory_v1_inventory_events_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InventoryTransferStarted.ProtoReflect.Descriptor instead.
+func (*InventoryTransferStarted) Descriptor() ([]byte, []int) {
+	return file_contracts_inventory_v1_inventory_events_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *InventoryTransferStarted) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *InventoryTransferStarted) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+func (x *InventoryTransferStarted) GetFromWarehouseId() string {
+	if x != nil {
+		return x.FromWarehouseId
+	}
+	return ""
+}
+
+func (x *InventoryTransferStarted) GetToWarehouseId() string {
+	if x != nil {
+		return x.ToWarehouseId
+	}
+	return ""
+}
+
+type InventoryTransferCompleted struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Metadata        *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Sku             string                 `protobuf:"bytes,2,opt,name=sku,proto3" json:"sku,omitempty"`
+	FromWarehouseId string                 `protobuf:"bytes,3,opt,name=from_warehouse_id,json=fromWarehouseId,proto3" json:"from_warehouse_id,omitempty"`
+	ToWarehouseId   string                 `protobuf:"bytes,4,opt,name=to_warehouse_id,json=toWarehouseId,proto3" json:"to_warehouse_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *InventoryTransferCompleted) Reset() {
+	*x = InventoryTransferCompleted{}
+	mi := &file_contracts_inventory_v1_inventory_events_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InventoryTransferCompleted) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InventoryTransferCompleted) ProtoMessage() {}
+
+func (x *InventoryTransferCompleted) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_inventory_v1_inventory_events_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InventoryTransferCompleted.ProtoReflect.Descriptor instead.
+func (*InventoryTransferCompleted) Descriptor() ([]byte, []int) {
+	return file_contracts_inventory_v1_inventory_events_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *InventoryTransferCompleted) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *InventoryTransferCompleted) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+func (x *InventoryTransferCompleted) GetFromWarehouseId() string {
+	if x != nil {
+		return x.FromWarehouseId
+	}
+	return ""
+}
+
+func (x *InventoryTransferCompleted) GetToWarehouseId() string {
+	if x != nil {
+		return x.ToWarehouseId
+	}
+	return ""
+}
+
+// manual/system correction
+type InventoryAdjusted struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	WarehouseId   string                 `protobuf:"bytes,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Sku           string                 `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InventoryAdjusted) Reset() {
+	*x = InventoryAdjusted{}
+	mi := &file_contracts_inventory_v1_inventory_events_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InventoryAdjusted) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InventoryAdjusted) ProtoMessage() {}
+
+func (x *InventoryAdjusted) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_inventory_v1_inventory_events_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InventoryAdjusted.ProtoReflect.Descriptor instead.
+func (*InventoryAdjusted) Descriptor() ([]byte, []int) {
+	return file_contracts_inventory_v1_inventory_events_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *InventoryAdjusted) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *InventoryAdjusted) GetWarehouseId() string {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return ""
+}
+
+func (x *InventoryAdjusted) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
 var File_contracts_inventory_v1_inventory_events_proto protoreflect.FileDescriptor
 
 const file_contracts_inventory_v1_inventory_events_proto_rawDesc = "" +
@@ -841,7 +1161,29 @@ const file_contracts_inventory_v1_inventory_events_proto_rawDesc = "" +
 	"\x1fREALLOCATION_REASON_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fDEMAND_SPIKE\x10\x01\x12\x19\n" +
 	"\x15OPTIMIZATION_DECISION\x10\x02\x12\x13\n" +
-	"\x0fMANUAL_OVERRIDE\x10\x03B\"Z contracts/inventory/v1;inventoryb\x06proto3"
+	"\x0fMANUAL_OVERRIDE\x10\x03\"\x87\x01\n" +
+	"\x1aInventoryReservationFailed\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12!\n" +
+	"\fwarehouse_id\x18\x02 \x01(\tR\vwarehouseId\x12\x10\n" +
+	"\x03sku\x18\x03 \x01(\tR\x03sku\"\x86\x01\n" +
+	"\x19InventoryShortageDetected\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12!\n" +
+	"\fwarehouse_id\x18\x02 \x01(\tR\vwarehouseId\x12\x10\n" +
+	"\x03sku\x18\x03 \x01(\tR\x03sku\"\xb6\x01\n" +
+	"\x18InventoryTransferStarted\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x10\n" +
+	"\x03sku\x18\x02 \x01(\tR\x03sku\x12*\n" +
+	"\x11from_warehouse_id\x18\x03 \x01(\tR\x0ffromWarehouseId\x12&\n" +
+	"\x0fto_warehouse_id\x18\x04 \x01(\tR\rtoWarehouseId\"\xb8\x01\n" +
+	"\x1aInventoryTransferCompleted\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x10\n" +
+	"\x03sku\x18\x02 \x01(\tR\x03sku\x12*\n" +
+	"\x11from_warehouse_id\x18\x03 \x01(\tR\x0ffromWarehouseId\x12&\n" +
+	"\x0fto_warehouse_id\x18\x04 \x01(\tR\rtoWarehouseId\"~\n" +
+	"\x11InventoryAdjusted\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12!\n" +
+	"\fwarehouse_id\x18\x02 \x01(\tR\vwarehouseId\x12\x10\n" +
+	"\x03sku\x18\x03 \x01(\tR\x03skuB\"Z contracts/inventory/v1;inventoryb\x06proto3"
 
 var (
 	file_contracts_inventory_v1_inventory_events_proto_rawDescOnce sync.Once
@@ -856,7 +1198,7 @@ func file_contracts_inventory_v1_inventory_events_proto_rawDescGZIP() []byte {
 }
 
 var file_contracts_inventory_v1_inventory_events_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_contracts_inventory_v1_inventory_events_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_contracts_inventory_v1_inventory_events_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_contracts_inventory_v1_inventory_events_proto_goTypes = []any{
 	(InventoryUpdated_UpdateReason)(0),              // 0: inventory.v1.InventoryUpdated.UpdateReason
 	(InventoryLowStock_Severity)(0),                 // 1: inventory.v1.InventoryLowStock.Severity
@@ -868,24 +1210,34 @@ var file_contracts_inventory_v1_inventory_events_proto_goTypes = []any{
 	(*InventoryReserved)(nil),                       // 7: inventory.v1.InventoryReserved
 	(*InventoryReservationReleased)(nil),            // 8: inventory.v1.InventoryReservationReleased
 	(*InventoryReallocated)(nil),                    // 9: inventory.v1.InventoryReallocated
-	(*v1.EventMetadata)(nil),                        // 10: common.v1.EventMetadata
+	(*InventoryReservationFailed)(nil),              // 10: inventory.v1.InventoryReservationFailed
+	(*InventoryShortageDetected)(nil),               // 11: inventory.v1.InventoryShortageDetected
+	(*InventoryTransferStarted)(nil),                // 12: inventory.v1.InventoryTransferStarted
+	(*InventoryTransferCompleted)(nil),              // 13: inventory.v1.InventoryTransferCompleted
+	(*InventoryAdjusted)(nil),                       // 14: inventory.v1.InventoryAdjusted
+	(*v1.EventMetadata)(nil),                        // 15: common.v1.EventMetadata
 }
 var file_contracts_inventory_v1_inventory_events_proto_depIdxs = []int32{
-	10, // 0: inventory.v1.InventoryUpdated.metadata:type_name -> common.v1.EventMetadata
+	15, // 0: inventory.v1.InventoryUpdated.metadata:type_name -> common.v1.EventMetadata
 	0,  // 1: inventory.v1.InventoryUpdated.reason:type_name -> inventory.v1.InventoryUpdated.UpdateReason
-	10, // 2: inventory.v1.InventoryLowStock.metadata:type_name -> common.v1.EventMetadata
+	15, // 2: inventory.v1.InventoryLowStock.metadata:type_name -> common.v1.EventMetadata
 	1,  // 3: inventory.v1.InventoryLowStock.severity:type_name -> inventory.v1.InventoryLowStock.Severity
-	10, // 4: inventory.v1.InventoryOutOfStock.metadata:type_name -> common.v1.EventMetadata
-	10, // 5: inventory.v1.InventoryReserved.metadata:type_name -> common.v1.EventMetadata
-	10, // 6: inventory.v1.InventoryReservationReleased.metadata:type_name -> common.v1.EventMetadata
+	15, // 4: inventory.v1.InventoryOutOfStock.metadata:type_name -> common.v1.EventMetadata
+	15, // 5: inventory.v1.InventoryReserved.metadata:type_name -> common.v1.EventMetadata
+	15, // 6: inventory.v1.InventoryReservationReleased.metadata:type_name -> common.v1.EventMetadata
 	2,  // 7: inventory.v1.InventoryReservationReleased.reason:type_name -> inventory.v1.InventoryReservationReleased.ReleaseReason
-	10, // 8: inventory.v1.InventoryReallocated.metadata:type_name -> common.v1.EventMetadata
+	15, // 8: inventory.v1.InventoryReallocated.metadata:type_name -> common.v1.EventMetadata
 	3,  // 9: inventory.v1.InventoryReallocated.reason:type_name -> inventory.v1.InventoryReallocated.ReallocationReason
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	15, // 10: inventory.v1.InventoryReservationFailed.metadata:type_name -> common.v1.EventMetadata
+	15, // 11: inventory.v1.InventoryShortageDetected.metadata:type_name -> common.v1.EventMetadata
+	15, // 12: inventory.v1.InventoryTransferStarted.metadata:type_name -> common.v1.EventMetadata
+	15, // 13: inventory.v1.InventoryTransferCompleted.metadata:type_name -> common.v1.EventMetadata
+	15, // 14: inventory.v1.InventoryAdjusted.metadata:type_name -> common.v1.EventMetadata
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_contracts_inventory_v1_inventory_events_proto_init() }
@@ -899,7 +1251,7 @@ func file_contracts_inventory_v1_inventory_events_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_inventory_v1_inventory_events_proto_rawDesc), len(file_contracts_inventory_v1_inventory_events_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   6,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
