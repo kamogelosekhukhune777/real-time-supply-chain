@@ -16,10 +16,16 @@ generate-inventory-v1:
 	  --go_opt=Mcontracts/inventory/v1/inventory_events.proto=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events/inventory/v1 \
 	  --go_opt=Mcontracts/sales/v1/sale_events.proto=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events/sales/v1 \
 	  --go_opt=Mcontracts/shipment/v1/shipment_events.proto=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events/shipment/v1 \
+	  --go_opt=Mcontracts/optimization/v1/optimization_events.proto=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events/optimization/v1 \
+	  --go_opt=Mcontracts/demand/v1/forecast_events.proto=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events/demand/v1 \
+	  --go_opt=Mcontracts/order/v1/order_events.proto=github.com/kamogelosekhukhune777/real-time-supply-chain/services/inventory/internal/service/events/order/v1 \
 	  contracts/common/v1/metadata.proto \
 	  contracts/inventory/v1/inventory_events.proto \
 	  contracts/sales/v1/sale_events.proto \
-	  contracts/shipment/v1/shipment_events.proto
+	  contracts/shipment/v1/shipment_events.proto \
+	  contracts/optimization/v1/optimization_events.proto \
+	  contracts/demand/v1/forecast_events.proto \
+	  contracts/order/v1/order_events.proto
 
 # ============================================================================================================================================
 # Docker Compose
