@@ -79,8 +79,8 @@ type DemandForecastUpdated struct {
 	Metadata             *v1.EventMetadata               `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	LocationId           string                          `protobuf:"bytes,2,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"` // store or warehouse
 	Sku                  string                          `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
-	ForecastHorizonHours int32                           `protobuf:"varint,4,opt,name=forecast_horizon_hours,json=forecastHorizonHours,proto3" json:"forecast_horizon_hours,omitempty"`
-	PredictedDemand      int32                           `protobuf:"varint,5,opt,name=predicted_demand,json=predictedDemand,proto3" json:"predicted_demand,omitempty"`
+	ForecastHorizonHours int64                           `protobuf:"varint,4,opt,name=forecast_horizon_hours,json=forecastHorizonHours,proto3" json:"forecast_horizon_hours,omitempty"`
+	PredictedDemand      int64                           `protobuf:"varint,5,opt,name=predicted_demand,json=predictedDemand,proto3" json:"predicted_demand,omitempty"`
 	Risk                 DemandForecastUpdated_RiskLevel `protobuf:"varint,6,opt,name=risk,proto3,enum=demand.v1.DemandForecastUpdated_RiskLevel" json:"risk,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
@@ -137,14 +137,14 @@ func (x *DemandForecastUpdated) GetSku() string {
 	return ""
 }
 
-func (x *DemandForecastUpdated) GetForecastHorizonHours() int32 {
+func (x *DemandForecastUpdated) GetForecastHorizonHours() int64 {
 	if x != nil {
 		return x.ForecastHorizonHours
 	}
 	return 0
 }
 
-func (x *DemandForecastUpdated) GetPredictedDemand() int32 {
+func (x *DemandForecastUpdated) GetPredictedDemand() int64 {
 	if x != nil {
 		return x.PredictedDemand
 	}
@@ -290,8 +290,8 @@ const file_contracts_demand_v1_forecast_events_proto_rawDesc = "" +
 	"\vlocation_id\x18\x02 \x01(\tR\n" +
 	"locationId\x12\x10\n" +
 	"\x03sku\x18\x03 \x01(\tR\x03sku\x124\n" +
-	"\x16forecast_horizon_hours\x18\x04 \x01(\x05R\x14forecastHorizonHours\x12)\n" +
-	"\x10predicted_demand\x18\x05 \x01(\x05R\x0fpredictedDemand\x12>\n" +
+	"\x16forecast_horizon_hours\x18\x04 \x01(\x03R\x14forecastHorizonHours\x12)\n" +
+	"\x10predicted_demand\x18\x05 \x01(\x03R\x0fpredictedDemand\x12>\n" +
 	"\x04risk\x18\x06 \x01(\x0e2*.demand.v1.DemandForecastUpdated.RiskLevelR\x04risk\"7\n" +
 	"\tRiskLevel\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\a\n" +

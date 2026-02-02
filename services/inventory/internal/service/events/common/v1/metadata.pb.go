@@ -29,7 +29,7 @@ type EventMetadata struct {
 	OccurredAt    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=occurred_at,json=occurredAt,proto3" json:"occurred_at,omitempty"`
 	Producer      string                 `protobuf:"bytes,4,opt,name=producer,proto3" json:"producer,omitempty"`
 	TenantId      string                 `protobuf:"bytes,5,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	SchemaVersion int32                  `protobuf:"varint,6,opt,name=schema_version,json=schemaVersion,proto3" json:"schema_version,omitempty"`
+	SchemaVersion int64                  `protobuf:"varint,6,opt,name=schema_version,json=schemaVersion,proto3" json:"schema_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -99,7 +99,7 @@ func (x *EventMetadata) GetTenantId() string {
 	return ""
 }
 
-func (x *EventMetadata) GetSchemaVersion() int32 {
+func (x *EventMetadata) GetSchemaVersion() int64 {
 	if x != nil {
 		return x.SchemaVersion
 	}
@@ -119,7 +119,7 @@ const file_contracts_common_v1_metadata_proto_rawDesc = "" +
 	"occurredAt\x12\x1a\n" +
 	"\bproducer\x18\x04 \x01(\tR\bproducer\x12\x1b\n" +
 	"\ttenant_id\x18\x05 \x01(\tR\btenantId\x12%\n" +
-	"\x0eschema_version\x18\x06 \x01(\x05R\rschemaVersionB\x1cZ\x1acontracts/common/v1;commonb\x06proto3"
+	"\x0eschema_version\x18\x06 \x01(\x03R\rschemaVersionB\x1cZ\x1acontracts/common/v1;commonb\x06proto3"
 
 var (
 	file_contracts_common_v1_metadata_proto_rawDescOnce sync.Once

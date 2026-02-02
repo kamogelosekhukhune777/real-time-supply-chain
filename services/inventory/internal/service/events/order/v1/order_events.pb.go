@@ -27,7 +27,9 @@ type OrderPlaced struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	OrderId       string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	LocationId    string                 `protobuf:"bytes,3,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"` // warehouse or store
+	WarehouseId   string                 `protobuf:"bytes,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"` // warehouse or store
+	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
+	Quantity      int64                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -76,11 +78,25 @@ func (x *OrderPlaced) GetOrderId() string {
 	return ""
 }
 
-func (x *OrderPlaced) GetLocationId() string {
+func (x *OrderPlaced) GetWarehouseId() string {
 	if x != nil {
-		return x.LocationId
+		return x.WarehouseId
 	}
 	return ""
+}
+
+func (x *OrderPlaced) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+func (x *OrderPlaced) GetQuantity() int64 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
 }
 
 // Order cancelled → release inventory
@@ -88,7 +104,9 @@ type OrderCancelled struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	OrderId       string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	LocationId    string                 `protobuf:"bytes,3,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
+	WarehouseId   string                 `protobuf:"bytes,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
+	Quantity      int64                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -137,28 +155,126 @@ func (x *OrderCancelled) GetOrderId() string {
 	return ""
 }
 
-func (x *OrderCancelled) GetLocationId() string {
+func (x *OrderCancelled) GetWarehouseId() string {
 	if x != nil {
-		return x.LocationId
+		return x.WarehouseId
 	}
 	return ""
+}
+
+func (x *OrderCancelled) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+func (x *OrderCancelled) GetQuantity() int64 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
+}
+
+type OrderShipped struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	OrderId       string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	WarehouseId   string                 `protobuf:"bytes,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
+	Quantity      int64                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderShipped) Reset() {
+	*x = OrderShipped{}
+	mi := &file_contracts_order_v1_order_events_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderShipped) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderShipped) ProtoMessage() {}
+
+func (x *OrderShipped) ProtoReflect() protoreflect.Message {
+	mi := &file_contracts_order_v1_order_events_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderShipped.ProtoReflect.Descriptor instead.
+func (*OrderShipped) Descriptor() ([]byte, []int) {
+	return file_contracts_order_v1_order_events_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *OrderShipped) GetMetadata() *v1.EventMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *OrderShipped) GetOrderId() string {
+	if x != nil {
+		return x.OrderId
+	}
+	return ""
+}
+
+func (x *OrderShipped) GetWarehouseId() string {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return ""
+}
+
+func (x *OrderShipped) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+func (x *OrderShipped) GetQuantity() int64 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
 }
 
 var File_contracts_order_v1_order_events_proto protoreflect.FileDescriptor
 
 const file_contracts_order_v1_order_events_proto_rawDesc = "" +
 	"\n" +
-	"%contracts/order/v1/order_events.proto\x12\border.v1\x1a\"contracts/common/v1/metadata.proto\"\x7f\n" +
+	"%contracts/order/v1/order_events.proto\x12\border.v1\x1a\"contracts/common/v1/metadata.proto\"\xaf\x01\n" +
 	"\vOrderPlaced\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x19\n" +
-	"\border_id\x18\x02 \x01(\tR\aorderId\x12\x1f\n" +
-	"\vlocation_id\x18\x03 \x01(\tR\n" +
-	"locationId\"\x82\x01\n" +
+	"\border_id\x18\x02 \x01(\tR\aorderId\x12!\n" +
+	"\fwarehouse_id\x18\x03 \x01(\tR\vwarehouseId\x12\x10\n" +
+	"\x03sku\x18\x04 \x01(\tR\x03sku\x12\x1a\n" +
+	"\bquantity\x18\x05 \x01(\x03R\bquantity\"\xb2\x01\n" +
 	"\x0eOrderCancelled\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x19\n" +
-	"\border_id\x18\x02 \x01(\tR\aorderId\x12\x1f\n" +
-	"\vlocation_id\x18\x03 \x01(\tR\n" +
-	"locationIdB\x1aZ\x18contracts/order/v1;orderb\x06proto3"
+	"\border_id\x18\x02 \x01(\tR\aorderId\x12!\n" +
+	"\fwarehouse_id\x18\x03 \x01(\tR\vwarehouseId\x12\x10\n" +
+	"\x03sku\x18\x04 \x01(\tR\x03sku\x12\x1a\n" +
+	"\bquantity\x18\x05 \x01(\x03R\bquantity\"\xb0\x01\n" +
+	"\fOrderShipped\x124\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x19\n" +
+	"\border_id\x18\x02 \x01(\tR\aorderId\x12!\n" +
+	"\fwarehouse_id\x18\x03 \x01(\tR\vwarehouseId\x12\x10\n" +
+	"\x03sku\x18\x04 \x01(\tR\x03sku\x12\x1a\n" +
+	"\bquantity\x18\x05 \x01(\x03R\bquantityB\x1aZ\x18contracts/order/v1;orderb\x06proto3"
 
 var (
 	file_contracts_order_v1_order_events_proto_rawDescOnce sync.Once
@@ -172,20 +288,22 @@ func file_contracts_order_v1_order_events_proto_rawDescGZIP() []byte {
 	return file_contracts_order_v1_order_events_proto_rawDescData
 }
 
-var file_contracts_order_v1_order_events_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_contracts_order_v1_order_events_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_contracts_order_v1_order_events_proto_goTypes = []any{
 	(*OrderPlaced)(nil),      // 0: order.v1.OrderPlaced
 	(*OrderCancelled)(nil),   // 1: order.v1.OrderCancelled
-	(*v1.EventMetadata)(nil), // 2: common.v1.EventMetadata
+	(*OrderShipped)(nil),     // 2: order.v1.OrderShipped
+	(*v1.EventMetadata)(nil), // 3: common.v1.EventMetadata
 }
 var file_contracts_order_v1_order_events_proto_depIdxs = []int32{
-	2, // 0: order.v1.OrderPlaced.metadata:type_name -> common.v1.EventMetadata
-	2, // 1: order.v1.OrderCancelled.metadata:type_name -> common.v1.EventMetadata
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3, // 0: order.v1.OrderPlaced.metadata:type_name -> common.v1.EventMetadata
+	3, // 1: order.v1.OrderCancelled.metadata:type_name -> common.v1.EventMetadata
+	3, // 2: order.v1.OrderShipped.metadata:type_name -> common.v1.EventMetadata
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_contracts_order_v1_order_events_proto_init() }
@@ -199,7 +317,7 @@ func file_contracts_order_v1_order_events_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_order_v1_order_events_proto_rawDesc), len(file_contracts_order_v1_order_events_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

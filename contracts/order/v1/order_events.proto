@@ -11,7 +11,9 @@ message OrderPlaced {
   common.v1.EventMetadata metadata = 1;
 
   string order_id = 2;
-  string location_id = 3; // warehouse or store
+  string warehouse_id = 3; // warehouse or store
+  string sku = 4;
+  int64 quantity = 5;
 }
 
 // Order cancelled → release inventory
@@ -19,5 +21,16 @@ message OrderCancelled {
   common.v1.EventMetadata metadata = 1;
 
   string order_id = 2;
-  string location_id = 3;
+  string warehouse_id = 3;
+  string sku = 4;
+  int64 quantity = 5;
+}
+
+message OrderShipped {
+  common.v1.EventMetadata metadata = 1;
+
+  string order_id = 2;
+  string warehouse_id = 3;
+  string sku = 4;
+  int64 quantity = 5;
 }

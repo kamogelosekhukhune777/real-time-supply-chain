@@ -10,10 +10,16 @@ message ShipmentCreated {
   common.v1.EventMetadata metadata = 1;
 
   string shipment_id = 2;
-  string origin_warehouse_id = 3;
-  string destination_id = 4;
-  int64 expected_delivery_time = 5;
+  string order_id = 3;
+  string warehouse_id = 4;
+  string sku = 5;
+  int64 quantity = 6;
+
+  string destination_id = 7;
+  int64 expected_delivery_time = 8;
 }
+
+
 
 message ShipmentArrived {
   common.v1.EventMetadata metadata = 1;
@@ -21,18 +27,21 @@ message ShipmentArrived {
   string shipment_id = 2;
   string destination_id = 3;
   string sku = 4;
-  int32 quantity = 5;
+  int64 quantity = 5;
   int64 occurred_at = 6;
 }
 
 message ShipmentCancelled {
   common.v1.EventMetadata metadata = 1;
 
-  string shipment_id = 2;
-  string destination_id = 3;
-  string sku = 4;
-  int32 quantity = 5;
-  int64 occurred_at = 6;
+  string order_id = 2;
+  string warehouse_id = 3;
+
+  string shipment_id = 4;
+  string destination_id = 5;
+  string sku = 6;
+  int64 quantity = 7;
+  int64 occurred_at = 8;
 }
 
 message ShipmentLocationUpdated {
@@ -47,7 +56,7 @@ message ShipmentDelayed {
   common.v1.EventMetadata metadata = 1;
 
   string shipment_id = 2;
-  int32 delay_minutes = 3;
+  int64 delay_minutes = 3;
   string reason = 4;
 }
 
@@ -72,8 +81,13 @@ message ShipmentInTransit {
 message ShipmentDelivered {
   common.v1.EventMetadata metadata = 1;
 
-  string shipment_id = 2;
-  string destination_id = 3;
+  string order_id = 2;
+  string warehouse_id = 3;
+  string sku = 4;
+  int64 quantity = 5;
+
+  string shipment_id = 6;
+  string destination_id = 7;
 }
 
 // Shipment returned to origin

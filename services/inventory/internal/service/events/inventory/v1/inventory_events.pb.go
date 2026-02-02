@@ -28,31 +28,46 @@ const (
 	InventoryUpdated_UPDATE_REASON_UNSPECIFIED InventoryUpdated_UpdateReason = 0
 	InventoryUpdated_ORDER_PLACED              InventoryUpdated_UpdateReason = 1
 	InventoryUpdated_ORDER_CANCELLED           InventoryUpdated_UpdateReason = 2
-	InventoryUpdated_SHIPMENT_RECEIVED         InventoryUpdated_UpdateReason = 3
-	InventoryUpdated_SHIPMENT_DISPATCHED       InventoryUpdated_UpdateReason = 4
-	InventoryUpdated_REALLOCATION              InventoryUpdated_UpdateReason = 5
-	InventoryUpdated_MANUAL_ADJUSTMENT         InventoryUpdated_UpdateReason = 6
+	InventoryUpdated_SHIPMENT_CREATED          InventoryUpdated_UpdateReason = 3
+	InventoryUpdated_SHIPMENT_RECEIVED         InventoryUpdated_UpdateReason = 4
+	InventoryUpdated_SHIPMENT_DISPATCHED       InventoryUpdated_UpdateReason = 5
+	InventoryUpdated_SHIPMENT_CANCELLED        InventoryUpdated_UpdateReason = 6
+	InventoryUpdated_SHIPMENT_DELIVERED        InventoryUpdated_UpdateReason = 7
+	InventoryUpdated_REALLOCATION              InventoryUpdated_UpdateReason = 8
+	InventoryUpdated_MANUAL_ADJUSTMENT         InventoryUpdated_UpdateReason = 9
+	InventoryUpdated_RESERVATION               InventoryUpdated_UpdateReason = 10
+	InventoryUpdated_RELEASE                   InventoryUpdated_UpdateReason = 11
 )
 
 // Enum value maps for InventoryUpdated_UpdateReason.
 var (
 	InventoryUpdated_UpdateReason_name = map[int32]string{
-		0: "UPDATE_REASON_UNSPECIFIED",
-		1: "ORDER_PLACED",
-		2: "ORDER_CANCELLED",
-		3: "SHIPMENT_RECEIVED",
-		4: "SHIPMENT_DISPATCHED",
-		5: "REALLOCATION",
-		6: "MANUAL_ADJUSTMENT",
+		0:  "UPDATE_REASON_UNSPECIFIED",
+		1:  "ORDER_PLACED",
+		2:  "ORDER_CANCELLED",
+		3:  "SHIPMENT_CREATED",
+		4:  "SHIPMENT_RECEIVED",
+		5:  "SHIPMENT_DISPATCHED",
+		6:  "SHIPMENT_CANCELLED",
+		7:  "SHIPMENT_DELIVERED",
+		8:  "REALLOCATION",
+		9:  "MANUAL_ADJUSTMENT",
+		10: "RESERVATION",
+		11: "RELEASE",
 	}
 	InventoryUpdated_UpdateReason_value = map[string]int32{
 		"UPDATE_REASON_UNSPECIFIED": 0,
 		"ORDER_PLACED":              1,
 		"ORDER_CANCELLED":           2,
-		"SHIPMENT_RECEIVED":         3,
-		"SHIPMENT_DISPATCHED":       4,
-		"REALLOCATION":              5,
-		"MANUAL_ADJUSTMENT":         6,
+		"SHIPMENT_CREATED":          3,
+		"SHIPMENT_RECEIVED":         4,
+		"SHIPMENT_DISPATCHED":       5,
+		"SHIPMENT_CANCELLED":        6,
+		"SHIPMENT_DELIVERED":        7,
+		"REALLOCATION":              8,
+		"MANUAL_ADJUSTMENT":         9,
+		"RESERVATION":               10,
+		"RELEASE":                   11,
 	}
 )
 
@@ -236,15 +251,79 @@ func (InventoryReallocated_ReallocationReason) EnumDescriptor() ([]byte, []int) 
 	return file_contracts_inventory_v1_inventory_events_proto_rawDescGZIP(), []int{5, 0}
 }
 
+type InventoryReservationFailed_FailureReason int32
+
+const (
+	InventoryReservationFailed_FAILURE_REASON_UNSPECIFIED    InventoryReservationFailed_FailureReason = 0
+	InventoryReservationFailed_INSUFFICIENT_STOCK            InventoryReservationFailed_FailureReason = 1
+	InventoryReservationFailed_SKU_NOT_FOUND                 InventoryReservationFailed_FailureReason = 2
+	InventoryReservationFailed_WAREHOUSE_NOT_FOUND           InventoryReservationFailed_FailureReason = 3
+	InventoryReservationFailed_INVENTORY_LOCKED              InventoryReservationFailed_FailureReason = 4
+	InventoryReservationFailed_CONCURRENT_MODIFICATION       InventoryReservationFailed_FailureReason = 5
+	InventoryReservationFailed_INVENTORY_SERVICE_UNAVAILABLE InventoryReservationFailed_FailureReason = 6
+	InventoryReservationFailed_INVALID_REQUEST               InventoryReservationFailed_FailureReason = 7
+)
+
+// Enum value maps for InventoryReservationFailed_FailureReason.
+var (
+	InventoryReservationFailed_FailureReason_name = map[int32]string{
+		0: "FAILURE_REASON_UNSPECIFIED",
+		1: "INSUFFICIENT_STOCK",
+		2: "SKU_NOT_FOUND",
+		3: "WAREHOUSE_NOT_FOUND",
+		4: "INVENTORY_LOCKED",
+		5: "CONCURRENT_MODIFICATION",
+		6: "INVENTORY_SERVICE_UNAVAILABLE",
+		7: "INVALID_REQUEST",
+	}
+	InventoryReservationFailed_FailureReason_value = map[string]int32{
+		"FAILURE_REASON_UNSPECIFIED":    0,
+		"INSUFFICIENT_STOCK":            1,
+		"SKU_NOT_FOUND":                 2,
+		"WAREHOUSE_NOT_FOUND":           3,
+		"INVENTORY_LOCKED":              4,
+		"CONCURRENT_MODIFICATION":       5,
+		"INVENTORY_SERVICE_UNAVAILABLE": 6,
+		"INVALID_REQUEST":               7,
+	}
+)
+
+func (x InventoryReservationFailed_FailureReason) Enum() *InventoryReservationFailed_FailureReason {
+	p := new(InventoryReservationFailed_FailureReason)
+	*p = x
+	return p
+}
+
+func (x InventoryReservationFailed_FailureReason) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (InventoryReservationFailed_FailureReason) Descriptor() protoreflect.EnumDescriptor {
+	return file_contracts_inventory_v1_inventory_events_proto_enumTypes[4].Descriptor()
+}
+
+func (InventoryReservationFailed_FailureReason) Type() protoreflect.EnumType {
+	return &file_contracts_inventory_v1_inventory_events_proto_enumTypes[4]
+}
+
+func (x InventoryReservationFailed_FailureReason) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use InventoryReservationFailed_FailureReason.Descriptor instead.
+func (InventoryReservationFailed_FailureReason) EnumDescriptor() ([]byte, []int) {
+	return file_contracts_inventory_v1_inventory_events_proto_rawDescGZIP(), []int{6, 0}
+}
+
 // Emitted whenever inventory quantities change
 type InventoryUpdated struct {
 	state             protoimpl.MessageState        `protogen:"open.v1"`
 	Metadata          *v1.EventMetadata             `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	WarehouseId       string                        `protobuf:"bytes,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
 	Sku               string                        `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
-	QuantityAvailable int32                         `protobuf:"varint,4,opt,name=quantity_available,json=quantityAvailable,proto3" json:"quantity_available,omitempty"`
-	QuantityReserved  int32                         `protobuf:"varint,5,opt,name=quantity_reserved,json=quantityReserved,proto3" json:"quantity_reserved,omitempty"`
-	QuantityIncoming  int32                         `protobuf:"varint,6,opt,name=quantity_incoming,json=quantityIncoming,proto3" json:"quantity_incoming,omitempty"`
+	QuantityAvailable int64                         `protobuf:"varint,4,opt,name=quantity_available,json=quantityAvailable,proto3" json:"quantity_available,omitempty"`
+	QuantityReserved  int64                         `protobuf:"varint,5,opt,name=quantity_reserved,json=quantityReserved,proto3" json:"quantity_reserved,omitempty"`
+	QuantityIncoming  int64                         `protobuf:"varint,6,opt,name=quantity_incoming,json=quantityIncoming,proto3" json:"quantity_incoming,omitempty"`
 	Reason            InventoryUpdated_UpdateReason `protobuf:"varint,7,opt,name=reason,proto3,enum=inventory.v1.InventoryUpdated_UpdateReason" json:"reason,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -301,21 +380,21 @@ func (x *InventoryUpdated) GetSku() string {
 	return ""
 }
 
-func (x *InventoryUpdated) GetQuantityAvailable() int32 {
+func (x *InventoryUpdated) GetQuantityAvailable() int64 {
 	if x != nil {
 		return x.QuantityAvailable
 	}
 	return 0
 }
 
-func (x *InventoryUpdated) GetQuantityReserved() int32 {
+func (x *InventoryUpdated) GetQuantityReserved() int64 {
 	if x != nil {
 		return x.QuantityReserved
 	}
 	return 0
 }
 
-func (x *InventoryUpdated) GetQuantityIncoming() int32 {
+func (x *InventoryUpdated) GetQuantityIncoming() int64 {
 	if x != nil {
 		return x.QuantityIncoming
 	}
@@ -335,8 +414,8 @@ type InventoryLowStock struct {
 	Metadata          *v1.EventMetadata          `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	WarehouseId       string                     `protobuf:"bytes,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
 	Sku               string                     `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
-	QuantityAvailable int32                      `protobuf:"varint,4,opt,name=quantity_available,json=quantityAvailable,proto3" json:"quantity_available,omitempty"`
-	Threshold         int32                      `protobuf:"varint,5,opt,name=threshold,proto3" json:"threshold,omitempty"`
+	QuantityAvailable int64                      `protobuf:"varint,4,opt,name=quantity_available,json=quantityAvailable,proto3" json:"quantity_available,omitempty"`
+	Threshold         int64                      `protobuf:"varint,5,opt,name=threshold,proto3" json:"threshold,omitempty"`
 	Severity          InventoryLowStock_Severity `protobuf:"varint,6,opt,name=severity,proto3,enum=inventory.v1.InventoryLowStock_Severity" json:"severity,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -393,14 +472,14 @@ func (x *InventoryLowStock) GetSku() string {
 	return ""
 }
 
-func (x *InventoryLowStock) GetQuantityAvailable() int32 {
+func (x *InventoryLowStock) GetQuantityAvailable() int64 {
 	if x != nil {
 		return x.QuantityAvailable
 	}
 	return 0
 }
 
-func (x *InventoryLowStock) GetThreshold() int32 {
+func (x *InventoryLowStock) GetThreshold() int64 {
 	if x != nil {
 		return x.Threshold
 	}
@@ -483,9 +562,9 @@ type InventoryReserved struct {
 	Sku                    string                 `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
 	ReservationId          string                 `protobuf:"bytes,4,opt,name=reservation_id,json=reservationId,proto3" json:"reservation_id,omitempty"`
 	OrderId                string                 `protobuf:"bytes,5,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	ReservedQuantity       int32                  `protobuf:"varint,6,opt,name=reserved_quantity,json=reservedQuantity,proto3" json:"reserved_quantity,omitempty"`
-	QuantityAvailableAfter int32                  `protobuf:"varint,7,opt,name=quantity_available_after,json=quantityAvailableAfter,proto3" json:"quantity_available_after,omitempty"`
-	QuantityReservedAfter  int32                  `protobuf:"varint,8,opt,name=quantity_reserved_after,json=quantityReservedAfter,proto3" json:"quantity_reserved_after,omitempty"`
+	ReservedQuantity       int64                  `protobuf:"varint,6,opt,name=reserved_quantity,json=reservedQuantity,proto3" json:"reserved_quantity,omitempty"`
+	QuantityAvailableAfter int64                  `protobuf:"varint,7,opt,name=quantity_available_after,json=quantityAvailableAfter,proto3" json:"quantity_available_after,omitempty"`
+	QuantityReservedAfter  int64                  `protobuf:"varint,8,opt,name=quantity_reserved_after,json=quantityReservedAfter,proto3" json:"quantity_reserved_after,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -555,21 +634,21 @@ func (x *InventoryReserved) GetOrderId() string {
 	return ""
 }
 
-func (x *InventoryReserved) GetReservedQuantity() int32 {
+func (x *InventoryReserved) GetReservedQuantity() int64 {
 	if x != nil {
 		return x.ReservedQuantity
 	}
 	return 0
 }
 
-func (x *InventoryReserved) GetQuantityAvailableAfter() int32 {
+func (x *InventoryReserved) GetQuantityAvailableAfter() int64 {
 	if x != nil {
 		return x.QuantityAvailableAfter
 	}
 	return 0
 }
 
-func (x *InventoryReserved) GetQuantityReservedAfter() int32 {
+func (x *InventoryReserved) GetQuantityReservedAfter() int64 {
 	if x != nil {
 		return x.QuantityReservedAfter
 	}
@@ -584,9 +663,9 @@ type InventoryReservationReleased struct {
 	Sku                    string                                     `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
 	ReservationId          string                                     `protobuf:"bytes,4,opt,name=reservation_id,json=reservationId,proto3" json:"reservation_id,omitempty"`
 	OrderId                string                                     `protobuf:"bytes,5,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	ReleasedQuantity       int32                                      `protobuf:"varint,6,opt,name=released_quantity,json=releasedQuantity,proto3" json:"released_quantity,omitempty"`
-	QuantityAvailableAfter int32                                      `protobuf:"varint,7,opt,name=quantity_available_after,json=quantityAvailableAfter,proto3" json:"quantity_available_after,omitempty"`
-	QuantityReservedAfter  int32                                      `protobuf:"varint,8,opt,name=quantity_reserved_after,json=quantityReservedAfter,proto3" json:"quantity_reserved_after,omitempty"`
+	ReleasedQuantity       int64                                      `protobuf:"varint,6,opt,name=released_quantity,json=releasedQuantity,proto3" json:"released_quantity,omitempty"`
+	QuantityAvailableAfter int64                                      `protobuf:"varint,7,opt,name=quantity_available_after,json=quantityAvailableAfter,proto3" json:"quantity_available_after,omitempty"`
+	QuantityReservedAfter  int64                                      `protobuf:"varint,8,opt,name=quantity_reserved_after,json=quantityReservedAfter,proto3" json:"quantity_reserved_after,omitempty"`
 	Reason                 InventoryReservationReleased_ReleaseReason `protobuf:"varint,9,opt,name=reason,proto3,enum=inventory.v1.InventoryReservationReleased_ReleaseReason" json:"reason,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -657,21 +736,21 @@ func (x *InventoryReservationReleased) GetOrderId() string {
 	return ""
 }
 
-func (x *InventoryReservationReleased) GetReleasedQuantity() int32 {
+func (x *InventoryReservationReleased) GetReleasedQuantity() int64 {
 	if x != nil {
 		return x.ReleasedQuantity
 	}
 	return 0
 }
 
-func (x *InventoryReservationReleased) GetQuantityAvailableAfter() int32 {
+func (x *InventoryReservationReleased) GetQuantityAvailableAfter() int64 {
 	if x != nil {
 		return x.QuantityAvailableAfter
 	}
 	return 0
 }
 
-func (x *InventoryReservationReleased) GetQuantityReservedAfter() int32 {
+func (x *InventoryReservationReleased) GetQuantityReservedAfter() int64 {
 	if x != nil {
 		return x.QuantityReservedAfter
 	}
@@ -692,7 +771,7 @@ type InventoryReallocated struct {
 	Sku             string                                  `protobuf:"bytes,2,opt,name=sku,proto3" json:"sku,omitempty"`
 	FromWarehouseId string                                  `protobuf:"bytes,3,opt,name=from_warehouse_id,json=fromWarehouseId,proto3" json:"from_warehouse_id,omitempty"`
 	ToWarehouseId   string                                  `protobuf:"bytes,4,opt,name=to_warehouse_id,json=toWarehouseId,proto3" json:"to_warehouse_id,omitempty"`
-	Quantity        int32                                   `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Quantity        int64                                   `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	Reason          InventoryReallocated_ReallocationReason `protobuf:"varint,6,opt,name=reason,proto3,enum=inventory.v1.InventoryReallocated_ReallocationReason" json:"reason,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -756,7 +835,7 @@ func (x *InventoryReallocated) GetToWarehouseId() string {
 	return ""
 }
 
-func (x *InventoryReallocated) GetQuantity() int32 {
+func (x *InventoryReallocated) GetQuantity() int64 {
 	if x != nil {
 		return x.Quantity
 	}
@@ -772,12 +851,16 @@ func (x *InventoryReallocated) GetReason() InventoryReallocated_ReallocationReas
 
 // reservation attempt failed
 type InventoryReservationFailed struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	WarehouseId   string                 `protobuf:"bytes,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	Sku           string                 `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState                   `protogen:"open.v1"`
+	Metadata          *v1.EventMetadata                        `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	WarehouseId       string                                   `protobuf:"bytes,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Sku               string                                   `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
+	OrderId           string                                   `protobuf:"bytes,4,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	RequestedQuantity int64                                    `protobuf:"varint,5,opt,name=requested_quantity,json=requestedQuantity,proto3" json:"requested_quantity,omitempty"`
+	AvailableQuantity int64                                    `protobuf:"varint,6,opt,name=available_quantity,json=availableQuantity,proto3" json:"available_quantity,omitempty"`
+	Reason            InventoryReservationFailed_FailureReason `protobuf:"varint,7,opt,name=reason,proto3,enum=inventory.v1.InventoryReservationFailed_FailureReason" json:"reason,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *InventoryReservationFailed) Reset() {
@@ -829,6 +912,34 @@ func (x *InventoryReservationFailed) GetSku() string {
 		return x.Sku
 	}
 	return ""
+}
+
+func (x *InventoryReservationFailed) GetOrderId() string {
+	if x != nil {
+		return x.OrderId
+	}
+	return ""
+}
+
+func (x *InventoryReservationFailed) GetRequestedQuantity() int64 {
+	if x != nil {
+		return x.RequestedQuantity
+	}
+	return 0
+}
+
+func (x *InventoryReservationFailed) GetAvailableQuantity() int64 {
+	if x != nil {
+		return x.AvailableQuantity
+	}
+	return 0
+}
+
+func (x *InventoryReservationFailed) GetReason() InventoryReservationFailed_FailureReason {
+	if x != nil {
+		return x.Reason
+	}
+	return InventoryReservationFailed_FAILURE_REASON_UNSPECIFIED
 }
 
 // inventory shortage detected
@@ -1094,29 +1205,35 @@ var File_contracts_inventory_v1_inventory_events_proto protoreflect.FileDescript
 
 const file_contracts_inventory_v1_inventory_events_proto_rawDesc = "" +
 	"\n" +
-	"-contracts/inventory/v1/inventory_events.proto\x12\finventory.v1\x1a\"contracts/common/v1/metadata.proto\"\xfb\x03\n" +
+	"-contracts/inventory/v1/inventory_events.proto\x12\finventory.v1\x1a\"contracts/common/v1/metadata.proto\"\xdf\x04\n" +
 	"\x10InventoryUpdated\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12!\n" +
 	"\fwarehouse_id\x18\x02 \x01(\tR\vwarehouseId\x12\x10\n" +
 	"\x03sku\x18\x03 \x01(\tR\x03sku\x12-\n" +
-	"\x12quantity_available\x18\x04 \x01(\x05R\x11quantityAvailable\x12+\n" +
-	"\x11quantity_reserved\x18\x05 \x01(\x05R\x10quantityReserved\x12+\n" +
-	"\x11quantity_incoming\x18\x06 \x01(\x05R\x10quantityIncoming\x12C\n" +
-	"\x06reason\x18\a \x01(\x0e2+.inventory.v1.InventoryUpdated.UpdateReasonR\x06reason\"\xad\x01\n" +
+	"\x12quantity_available\x18\x04 \x01(\x03R\x11quantityAvailable\x12+\n" +
+	"\x11quantity_reserved\x18\x05 \x01(\x03R\x10quantityReserved\x12+\n" +
+	"\x11quantity_incoming\x18\x06 \x01(\x03R\x10quantityIncoming\x12C\n" +
+	"\x06reason\x18\a \x01(\x0e2+.inventory.v1.InventoryUpdated.UpdateReasonR\x06reason\"\x91\x02\n" +
 	"\fUpdateReason\x12\x1d\n" +
 	"\x19UPDATE_REASON_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fORDER_PLACED\x10\x01\x12\x13\n" +
-	"\x0fORDER_CANCELLED\x10\x02\x12\x15\n" +
-	"\x11SHIPMENT_RECEIVED\x10\x03\x12\x17\n" +
-	"\x13SHIPMENT_DISPATCHED\x10\x04\x12\x10\n" +
-	"\fREALLOCATION\x10\x05\x12\x15\n" +
-	"\x11MANUAL_ADJUSTMENT\x10\x06\"\xd2\x02\n" +
+	"\x0fORDER_CANCELLED\x10\x02\x12\x14\n" +
+	"\x10SHIPMENT_CREATED\x10\x03\x12\x15\n" +
+	"\x11SHIPMENT_RECEIVED\x10\x04\x12\x17\n" +
+	"\x13SHIPMENT_DISPATCHED\x10\x05\x12\x16\n" +
+	"\x12SHIPMENT_CANCELLED\x10\x06\x12\x16\n" +
+	"\x12SHIPMENT_DELIVERED\x10\a\x12\x10\n" +
+	"\fREALLOCATION\x10\b\x12\x15\n" +
+	"\x11MANUAL_ADJUSTMENT\x10\t\x12\x0f\n" +
+	"\vRESERVATION\x10\n" +
+	"\x12\v\n" +
+	"\aRELEASE\x10\v\"\xd2\x02\n" +
 	"\x11InventoryLowStock\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12!\n" +
 	"\fwarehouse_id\x18\x02 \x01(\tR\vwarehouseId\x12\x10\n" +
 	"\x03sku\x18\x03 \x01(\tR\x03sku\x12-\n" +
-	"\x12quantity_available\x18\x04 \x01(\x05R\x11quantityAvailable\x12\x1c\n" +
-	"\tthreshold\x18\x05 \x01(\x05R\tthreshold\x12D\n" +
+	"\x12quantity_available\x18\x04 \x01(\x03R\x11quantityAvailable\x12\x1c\n" +
+	"\tthreshold\x18\x05 \x01(\x03R\tthreshold\x12D\n" +
 	"\bseverity\x18\x06 \x01(\x0e2(.inventory.v1.InventoryLowStock.SeverityR\bseverity\"?\n" +
 	"\bSeverity\x12\x18\n" +
 	"\x14SEVERITY_UNSPECIFIED\x10\x00\x12\v\n" +
@@ -1132,18 +1249,18 @@ const file_contracts_inventory_v1_inventory_events_proto_rawDesc = "" +
 	"\x03sku\x18\x03 \x01(\tR\x03sku\x12%\n" +
 	"\x0ereservation_id\x18\x04 \x01(\tR\rreservationId\x12\x19\n" +
 	"\border_id\x18\x05 \x01(\tR\aorderId\x12+\n" +
-	"\x11reserved_quantity\x18\x06 \x01(\x05R\x10reservedQuantity\x128\n" +
-	"\x18quantity_available_after\x18\a \x01(\x05R\x16quantityAvailableAfter\x126\n" +
-	"\x17quantity_reserved_after\x18\b \x01(\x05R\x15quantityReservedAfter\"\xaf\x04\n" +
+	"\x11reserved_quantity\x18\x06 \x01(\x03R\x10reservedQuantity\x128\n" +
+	"\x18quantity_available_after\x18\a \x01(\x03R\x16quantityAvailableAfter\x126\n" +
+	"\x17quantity_reserved_after\x18\b \x01(\x03R\x15quantityReservedAfter\"\xaf\x04\n" +
 	"\x1cInventoryReservationReleased\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12!\n" +
 	"\fwarehouse_id\x18\x02 \x01(\tR\vwarehouseId\x12\x10\n" +
 	"\x03sku\x18\x03 \x01(\tR\x03sku\x12%\n" +
 	"\x0ereservation_id\x18\x04 \x01(\tR\rreservationId\x12\x19\n" +
 	"\border_id\x18\x05 \x01(\tR\aorderId\x12+\n" +
-	"\x11released_quantity\x18\x06 \x01(\x05R\x10releasedQuantity\x128\n" +
-	"\x18quantity_available_after\x18\a \x01(\x05R\x16quantityAvailableAfter\x126\n" +
-	"\x17quantity_reserved_after\x18\b \x01(\x05R\x15quantityReservedAfter\x12P\n" +
+	"\x11released_quantity\x18\x06 \x01(\x03R\x10releasedQuantity\x128\n" +
+	"\x18quantity_available_after\x18\a \x01(\x03R\x16quantityAvailableAfter\x126\n" +
+	"\x17quantity_reserved_after\x18\b \x01(\x03R\x15quantityReservedAfter\x12P\n" +
 	"\x06reason\x18\t \x01(\x0e28.inventory.v1.InventoryReservationReleased.ReleaseReasonR\x06reason\"q\n" +
 	"\rReleaseReason\x12\x1e\n" +
 	"\x1aRELEASE_REASON_UNSPECIFIED\x10\x00\x12\x13\n" +
@@ -1155,17 +1272,30 @@ const file_contracts_inventory_v1_inventory_events_proto_rawDesc = "" +
 	"\x03sku\x18\x02 \x01(\tR\x03sku\x12*\n" +
 	"\x11from_warehouse_id\x18\x03 \x01(\tR\x0ffromWarehouseId\x12&\n" +
 	"\x0fto_warehouse_id\x18\x04 \x01(\tR\rtoWarehouseId\x12\x1a\n" +
-	"\bquantity\x18\x05 \x01(\x05R\bquantity\x12M\n" +
+	"\bquantity\x18\x05 \x01(\x03R\bquantity\x12M\n" +
 	"\x06reason\x18\x06 \x01(\x0e25.inventory.v1.InventoryReallocated.ReallocationReasonR\x06reason\"{\n" +
 	"\x12ReallocationReason\x12#\n" +
 	"\x1fREALLOCATION_REASON_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fDEMAND_SPIKE\x10\x01\x12\x19\n" +
 	"\x15OPTIMIZATION_DECISION\x10\x02\x12\x13\n" +
-	"\x0fMANUAL_OVERRIDE\x10\x03\"\x87\x01\n" +
+	"\x0fMANUAL_OVERRIDE\x10\x03\"\xb1\x04\n" +
 	"\x1aInventoryReservationFailed\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12!\n" +
 	"\fwarehouse_id\x18\x02 \x01(\tR\vwarehouseId\x12\x10\n" +
-	"\x03sku\x18\x03 \x01(\tR\x03sku\"\x86\x01\n" +
+	"\x03sku\x18\x03 \x01(\tR\x03sku\x12\x19\n" +
+	"\border_id\x18\x04 \x01(\tR\aorderId\x12-\n" +
+	"\x12requested_quantity\x18\x05 \x01(\x03R\x11requestedQuantity\x12-\n" +
+	"\x12available_quantity\x18\x06 \x01(\x03R\x11availableQuantity\x12N\n" +
+	"\x06reason\x18\a \x01(\x0e26.inventory.v1.InventoryReservationFailed.FailureReasonR\x06reason\"\xde\x01\n" +
+	"\rFailureReason\x12\x1e\n" +
+	"\x1aFAILURE_REASON_UNSPECIFIED\x10\x00\x12\x16\n" +
+	"\x12INSUFFICIENT_STOCK\x10\x01\x12\x11\n" +
+	"\rSKU_NOT_FOUND\x10\x02\x12\x17\n" +
+	"\x13WAREHOUSE_NOT_FOUND\x10\x03\x12\x14\n" +
+	"\x10INVENTORY_LOCKED\x10\x04\x12\x1b\n" +
+	"\x17CONCURRENT_MODIFICATION\x10\x05\x12!\n" +
+	"\x1dINVENTORY_SERVICE_UNAVAILABLE\x10\x06\x12\x13\n" +
+	"\x0fINVALID_REQUEST\x10\a\"\x86\x01\n" +
 	"\x19InventoryShortageDetected\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12!\n" +
 	"\fwarehouse_id\x18\x02 \x01(\tR\vwarehouseId\x12\x10\n" +
@@ -1197,47 +1327,49 @@ func file_contracts_inventory_v1_inventory_events_proto_rawDescGZIP() []byte {
 	return file_contracts_inventory_v1_inventory_events_proto_rawDescData
 }
 
-var file_contracts_inventory_v1_inventory_events_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_contracts_inventory_v1_inventory_events_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_contracts_inventory_v1_inventory_events_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_contracts_inventory_v1_inventory_events_proto_goTypes = []any{
 	(InventoryUpdated_UpdateReason)(0),              // 0: inventory.v1.InventoryUpdated.UpdateReason
 	(InventoryLowStock_Severity)(0),                 // 1: inventory.v1.InventoryLowStock.Severity
 	(InventoryReservationReleased_ReleaseReason)(0), // 2: inventory.v1.InventoryReservationReleased.ReleaseReason
 	(InventoryReallocated_ReallocationReason)(0),    // 3: inventory.v1.InventoryReallocated.ReallocationReason
-	(*InventoryUpdated)(nil),                        // 4: inventory.v1.InventoryUpdated
-	(*InventoryLowStock)(nil),                       // 5: inventory.v1.InventoryLowStock
-	(*InventoryOutOfStock)(nil),                     // 6: inventory.v1.InventoryOutOfStock
-	(*InventoryReserved)(nil),                       // 7: inventory.v1.InventoryReserved
-	(*InventoryReservationReleased)(nil),            // 8: inventory.v1.InventoryReservationReleased
-	(*InventoryReallocated)(nil),                    // 9: inventory.v1.InventoryReallocated
-	(*InventoryReservationFailed)(nil),              // 10: inventory.v1.InventoryReservationFailed
-	(*InventoryShortageDetected)(nil),               // 11: inventory.v1.InventoryShortageDetected
-	(*InventoryTransferStarted)(nil),                // 12: inventory.v1.InventoryTransferStarted
-	(*InventoryTransferCompleted)(nil),              // 13: inventory.v1.InventoryTransferCompleted
-	(*InventoryAdjusted)(nil),                       // 14: inventory.v1.InventoryAdjusted
-	(*v1.EventMetadata)(nil),                        // 15: common.v1.EventMetadata
+	(InventoryReservationFailed_FailureReason)(0),   // 4: inventory.v1.InventoryReservationFailed.FailureReason
+	(*InventoryUpdated)(nil),                        // 5: inventory.v1.InventoryUpdated
+	(*InventoryLowStock)(nil),                       // 6: inventory.v1.InventoryLowStock
+	(*InventoryOutOfStock)(nil),                     // 7: inventory.v1.InventoryOutOfStock
+	(*InventoryReserved)(nil),                       // 8: inventory.v1.InventoryReserved
+	(*InventoryReservationReleased)(nil),            // 9: inventory.v1.InventoryReservationReleased
+	(*InventoryReallocated)(nil),                    // 10: inventory.v1.InventoryReallocated
+	(*InventoryReservationFailed)(nil),              // 11: inventory.v1.InventoryReservationFailed
+	(*InventoryShortageDetected)(nil),               // 12: inventory.v1.InventoryShortageDetected
+	(*InventoryTransferStarted)(nil),                // 13: inventory.v1.InventoryTransferStarted
+	(*InventoryTransferCompleted)(nil),              // 14: inventory.v1.InventoryTransferCompleted
+	(*InventoryAdjusted)(nil),                       // 15: inventory.v1.InventoryAdjusted
+	(*v1.EventMetadata)(nil),                        // 16: common.v1.EventMetadata
 }
 var file_contracts_inventory_v1_inventory_events_proto_depIdxs = []int32{
-	15, // 0: inventory.v1.InventoryUpdated.metadata:type_name -> common.v1.EventMetadata
+	16, // 0: inventory.v1.InventoryUpdated.metadata:type_name -> common.v1.EventMetadata
 	0,  // 1: inventory.v1.InventoryUpdated.reason:type_name -> inventory.v1.InventoryUpdated.UpdateReason
-	15, // 2: inventory.v1.InventoryLowStock.metadata:type_name -> common.v1.EventMetadata
+	16, // 2: inventory.v1.InventoryLowStock.metadata:type_name -> common.v1.EventMetadata
 	1,  // 3: inventory.v1.InventoryLowStock.severity:type_name -> inventory.v1.InventoryLowStock.Severity
-	15, // 4: inventory.v1.InventoryOutOfStock.metadata:type_name -> common.v1.EventMetadata
-	15, // 5: inventory.v1.InventoryReserved.metadata:type_name -> common.v1.EventMetadata
-	15, // 6: inventory.v1.InventoryReservationReleased.metadata:type_name -> common.v1.EventMetadata
+	16, // 4: inventory.v1.InventoryOutOfStock.metadata:type_name -> common.v1.EventMetadata
+	16, // 5: inventory.v1.InventoryReserved.metadata:type_name -> common.v1.EventMetadata
+	16, // 6: inventory.v1.InventoryReservationReleased.metadata:type_name -> common.v1.EventMetadata
 	2,  // 7: inventory.v1.InventoryReservationReleased.reason:type_name -> inventory.v1.InventoryReservationReleased.ReleaseReason
-	15, // 8: inventory.v1.InventoryReallocated.metadata:type_name -> common.v1.EventMetadata
+	16, // 8: inventory.v1.InventoryReallocated.metadata:type_name -> common.v1.EventMetadata
 	3,  // 9: inventory.v1.InventoryReallocated.reason:type_name -> inventory.v1.InventoryReallocated.ReallocationReason
-	15, // 10: inventory.v1.InventoryReservationFailed.metadata:type_name -> common.v1.EventMetadata
-	15, // 11: inventory.v1.InventoryShortageDetected.metadata:type_name -> common.v1.EventMetadata
-	15, // 12: inventory.v1.InventoryTransferStarted.metadata:type_name -> common.v1.EventMetadata
-	15, // 13: inventory.v1.InventoryTransferCompleted.metadata:type_name -> common.v1.EventMetadata
-	15, // 14: inventory.v1.InventoryAdjusted.metadata:type_name -> common.v1.EventMetadata
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	16, // 10: inventory.v1.InventoryReservationFailed.metadata:type_name -> common.v1.EventMetadata
+	4,  // 11: inventory.v1.InventoryReservationFailed.reason:type_name -> inventory.v1.InventoryReservationFailed.FailureReason
+	16, // 12: inventory.v1.InventoryShortageDetected.metadata:type_name -> common.v1.EventMetadata
+	16, // 13: inventory.v1.InventoryTransferStarted.metadata:type_name -> common.v1.EventMetadata
+	16, // 14: inventory.v1.InventoryTransferCompleted.metadata:type_name -> common.v1.EventMetadata
+	16, // 15: inventory.v1.InventoryAdjusted.metadata:type_name -> common.v1.EventMetadata
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_contracts_inventory_v1_inventory_events_proto_init() }
@@ -1250,7 +1382,7 @@ func file_contracts_inventory_v1_inventory_events_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_contracts_inventory_v1_inventory_events_proto_rawDesc), len(file_contracts_inventory_v1_inventory_events_proto_rawDesc)),
-			NumEnums:      4,
+			NumEnums:      5,
 			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,

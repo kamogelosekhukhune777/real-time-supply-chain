@@ -12,5 +12,5 @@ message EventMetadata {
   google.protobuf.Timestamp occurred_at = 3;
   string producer = 4;
   string tenant_id = 5;
-  int32 schema_version = 6;
+  int64 schema_version = 6;
 }

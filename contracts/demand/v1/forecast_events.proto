@@ -11,8 +11,8 @@ message DemandForecastUpdated {
 
   string location_id = 2; // store or warehouse
   string sku = 3;
-  int32 forecast_horizon_hours = 4;
-  int32 predicted_demand = 5;
+  int64 forecast_horizon_hours = 4;
+  int64 predicted_demand = 5;
 
   enum RiskLevel {
     UNKNOWN = 0;

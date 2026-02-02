@@ -12,7 +12,7 @@ message SaleCompleted {
   string sale_id = 2;
   string store_id = 3;
   string sku = 4;
-  int32 quantity = 5;
+  int64 quantity = 5;
 }
 
 //====================================================================================================

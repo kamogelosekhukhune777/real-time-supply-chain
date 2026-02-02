@@ -28,7 +28,7 @@ type SaleCompleted struct {
 	SaleId        string                 `protobuf:"bytes,2,opt,name=sale_id,json=saleId,proto3" json:"sale_id,omitempty"`
 	StoreId       string                 `protobuf:"bytes,3,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
 	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
-	Quantity      int32                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Quantity      int64                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -91,7 +91,7 @@ func (x *SaleCompleted) GetSku() string {
 	return ""
 }
 
-func (x *SaleCompleted) GetQuantity() int32 {
+func (x *SaleCompleted) GetQuantity() int64 {
 	if x != nil {
 		return x.Quantity
 	}
@@ -230,7 +230,7 @@ const file_contracts_sales_v1_sale_events_proto_rawDesc = "" +
 	"\asale_id\x18\x02 \x01(\tR\x06saleId\x12\x19\n" +
 	"\bstore_id\x18\x03 \x01(\tR\astoreId\x12\x10\n" +
 	"\x03sku\x18\x04 \x01(\tR\x03sku\x12\x1a\n" +
-	"\bquantity\x18\x05 \x01(\x05R\bquantity\"w\n" +
+	"\bquantity\x18\x05 \x01(\x03R\bquantity\"w\n" +
 	"\vSaleStarted\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x17\n" +
 	"\asale_id\x18\x02 \x01(\tR\x06saleId\x12\x19\n" +

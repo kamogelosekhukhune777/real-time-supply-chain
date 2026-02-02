@@ -26,9 +26,12 @@ type ShipmentCreated struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	Metadata             *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	ShipmentId           string                 `protobuf:"bytes,2,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
-	OriginWarehouseId    string                 `protobuf:"bytes,3,opt,name=origin_warehouse_id,json=originWarehouseId,proto3" json:"origin_warehouse_id,omitempty"`
-	DestinationId        string                 `protobuf:"bytes,4,opt,name=destination_id,json=destinationId,proto3" json:"destination_id,omitempty"`
-	ExpectedDeliveryTime int64                  `protobuf:"varint,5,opt,name=expected_delivery_time,json=expectedDeliveryTime,proto3" json:"expected_delivery_time,omitempty"`
+	OrderId              string                 `protobuf:"bytes,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	WarehouseId          string                 `protobuf:"bytes,4,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Sku                  string                 `protobuf:"bytes,5,opt,name=sku,proto3" json:"sku,omitempty"`
+	Quantity             int64                  `protobuf:"varint,6,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	DestinationId        string                 `protobuf:"bytes,7,opt,name=destination_id,json=destinationId,proto3" json:"destination_id,omitempty"`
+	ExpectedDeliveryTime int64                  `protobuf:"varint,8,opt,name=expected_delivery_time,json=expectedDeliveryTime,proto3" json:"expected_delivery_time,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -77,11 +80,32 @@ func (x *ShipmentCreated) GetShipmentId() string {
 	return ""
 }
 
-func (x *ShipmentCreated) GetOriginWarehouseId() string {
+func (x *ShipmentCreated) GetOrderId() string {
 	if x != nil {
-		return x.OriginWarehouseId
+		return x.OrderId
 	}
 	return ""
+}
+
+func (x *ShipmentCreated) GetWarehouseId() string {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return ""
+}
+
+func (x *ShipmentCreated) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+func (x *ShipmentCreated) GetQuantity() int64 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
 }
 
 func (x *ShipmentCreated) GetDestinationId() string {
@@ -104,7 +128,7 @@ type ShipmentArrived struct {
 	ShipmentId    string                 `protobuf:"bytes,2,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
 	DestinationId string                 `protobuf:"bytes,3,opt,name=destination_id,json=destinationId,proto3" json:"destination_id,omitempty"`
 	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
-	Quantity      int32                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Quantity      int64                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	OccurredAt    int64                  `protobuf:"varint,6,opt,name=occurred_at,json=occurredAt,proto3" json:"occurred_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -168,7 +192,7 @@ func (x *ShipmentArrived) GetSku() string {
 	return ""
 }
 
-func (x *ShipmentArrived) GetQuantity() int32 {
+func (x *ShipmentArrived) GetQuantity() int64 {
 	if x != nil {
 		return x.Quantity
 	}
@@ -185,11 +209,13 @@ func (x *ShipmentArrived) GetOccurredAt() int64 {
 type ShipmentCancelled struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	ShipmentId    string                 `protobuf:"bytes,2,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
-	DestinationId string                 `protobuf:"bytes,3,opt,name=destination_id,json=destinationId,proto3" json:"destination_id,omitempty"`
-	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
-	Quantity      int32                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	OccurredAt    int64                  `protobuf:"varint,6,opt,name=occurred_at,json=occurredAt,proto3" json:"occurred_at,omitempty"`
+	OrderId       string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	WarehouseId   string                 `protobuf:"bytes,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	ShipmentId    string                 `protobuf:"bytes,4,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
+	DestinationId string                 `protobuf:"bytes,5,opt,name=destination_id,json=destinationId,proto3" json:"destination_id,omitempty"`
+	Sku           string                 `protobuf:"bytes,6,opt,name=sku,proto3" json:"sku,omitempty"`
+	Quantity      int64                  `protobuf:"varint,7,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	OccurredAt    int64                  `protobuf:"varint,8,opt,name=occurred_at,json=occurredAt,proto3" json:"occurred_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -231,6 +257,20 @@ func (x *ShipmentCancelled) GetMetadata() *v1.EventMetadata {
 	return nil
 }
 
+func (x *ShipmentCancelled) GetOrderId() string {
+	if x != nil {
+		return x.OrderId
+	}
+	return ""
+}
+
+func (x *ShipmentCancelled) GetWarehouseId() string {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return ""
+}
+
 func (x *ShipmentCancelled) GetShipmentId() string {
 	if x != nil {
 		return x.ShipmentId
@@ -252,7 +292,7 @@ func (x *ShipmentCancelled) GetSku() string {
 	return ""
 }
 
-func (x *ShipmentCancelled) GetQuantity() int32 {
+func (x *ShipmentCancelled) GetQuantity() int64 {
 	if x != nil {
 		return x.Quantity
 	}
@@ -338,7 +378,7 @@ type ShipmentDelayed struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	ShipmentId    string                 `protobuf:"bytes,2,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
-	DelayMinutes  int32                  `protobuf:"varint,3,opt,name=delay_minutes,json=delayMinutes,proto3" json:"delay_minutes,omitempty"`
+	DelayMinutes  int64                  `protobuf:"varint,3,opt,name=delay_minutes,json=delayMinutes,proto3" json:"delay_minutes,omitempty"`
 	Reason        string                 `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -388,7 +428,7 @@ func (x *ShipmentDelayed) GetShipmentId() string {
 	return ""
 }
 
-func (x *ShipmentDelayed) GetDelayMinutes() int32 {
+func (x *ShipmentDelayed) GetDelayMinutes() int64 {
 	if x != nil {
 		return x.DelayMinutes
 	}
@@ -520,8 +560,12 @@ func (x *ShipmentInTransit) GetShipmentId() string {
 type ShipmentDelivered struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Metadata      *v1.EventMetadata      `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	ShipmentId    string                 `protobuf:"bytes,2,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
-	DestinationId string                 `protobuf:"bytes,3,opt,name=destination_id,json=destinationId,proto3" json:"destination_id,omitempty"`
+	OrderId       string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	WarehouseId   string                 `protobuf:"bytes,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
+	Quantity      int64                  `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	ShipmentId    string                 `protobuf:"bytes,6,opt,name=shipment_id,json=shipmentId,proto3" json:"shipment_id,omitempty"`
+	DestinationId string                 `protobuf:"bytes,7,opt,name=destination_id,json=destinationId,proto3" json:"destination_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -561,6 +605,34 @@ func (x *ShipmentDelivered) GetMetadata() *v1.EventMetadata {
 		return x.Metadata
 	}
 	return nil
+}
+
+func (x *ShipmentDelivered) GetOrderId() string {
+	if x != nil {
+		return x.OrderId
+	}
+	return ""
+}
+
+func (x *ShipmentDelivered) GetWarehouseId() string {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return ""
+}
+
+func (x *ShipmentDelivered) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+func (x *ShipmentDelivered) GetQuantity() int64 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
 }
 
 func (x *ShipmentDelivered) GetShipmentId() string {
@@ -642,31 +714,36 @@ var File_contracts_shipment_v1_shipment_events_proto protoreflect.FileDescriptor
 
 const file_contracts_shipment_v1_shipment_events_proto_rawDesc = "" +
 	"\n" +
-	"+contracts/shipment/v1/shipment_events.proto\x12\vshipment.v1\x1a\"contracts/common/v1/metadata.proto\"\xf5\x01\n" +
+	"+contracts/shipment/v1/shipment_events.proto\x12\vshipment.v1\x1a\"contracts/common/v1/metadata.proto\"\xb1\x02\n" +
 	"\x0fShipmentCreated\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
 	"\vshipment_id\x18\x02 \x01(\tR\n" +
-	"shipmentId\x12.\n" +
-	"\x13origin_warehouse_id\x18\x03 \x01(\tR\x11originWarehouseId\x12%\n" +
-	"\x0edestination_id\x18\x04 \x01(\tR\rdestinationId\x124\n" +
-	"\x16expected_delivery_time\x18\x05 \x01(\x03R\x14expectedDeliveryTime\"\xde\x01\n" +
+	"shipmentId\x12\x19\n" +
+	"\border_id\x18\x03 \x01(\tR\aorderId\x12!\n" +
+	"\fwarehouse_id\x18\x04 \x01(\tR\vwarehouseId\x12\x10\n" +
+	"\x03sku\x18\x05 \x01(\tR\x03sku\x12\x1a\n" +
+	"\bquantity\x18\x06 \x01(\x03R\bquantity\x12%\n" +
+	"\x0edestination_id\x18\a \x01(\tR\rdestinationId\x124\n" +
+	"\x16expected_delivery_time\x18\b \x01(\x03R\x14expectedDeliveryTime\"\xde\x01\n" +
 	"\x0fShipmentArrived\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
 	"\vshipment_id\x18\x02 \x01(\tR\n" +
 	"shipmentId\x12%\n" +
 	"\x0edestination_id\x18\x03 \x01(\tR\rdestinationId\x12\x10\n" +
 	"\x03sku\x18\x04 \x01(\tR\x03sku\x12\x1a\n" +
-	"\bquantity\x18\x05 \x01(\x05R\bquantity\x12\x1f\n" +
+	"\bquantity\x18\x05 \x01(\x03R\bquantity\x12\x1f\n" +
 	"\voccurred_at\x18\x06 \x01(\x03R\n" +
-	"occurredAt\"\xe0\x01\n" +
+	"occurredAt\"\x9e\x02\n" +
 	"\x11ShipmentCancelled\x124\n" +
-	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
-	"\vshipment_id\x18\x02 \x01(\tR\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x19\n" +
+	"\border_id\x18\x02 \x01(\tR\aorderId\x12!\n" +
+	"\fwarehouse_id\x18\x03 \x01(\tR\vwarehouseId\x12\x1f\n" +
+	"\vshipment_id\x18\x04 \x01(\tR\n" +
 	"shipmentId\x12%\n" +
-	"\x0edestination_id\x18\x03 \x01(\tR\rdestinationId\x12\x10\n" +
-	"\x03sku\x18\x04 \x01(\tR\x03sku\x12\x1a\n" +
-	"\bquantity\x18\x05 \x01(\x05R\bquantity\x12\x1f\n" +
-	"\voccurred_at\x18\x06 \x01(\x03R\n" +
+	"\x0edestination_id\x18\x05 \x01(\tR\rdestinationId\x12\x10\n" +
+	"\x03sku\x18\x06 \x01(\tR\x03sku\x12\x1a\n" +
+	"\bquantity\x18\a \x01(\x03R\bquantity\x12\x1f\n" +
+	"\voccurred_at\x18\b \x01(\x03R\n" +
 	"occurredAt\"\xaa\x01\n" +
 	"\x17ShipmentLocationUpdated\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
@@ -678,7 +755,7 @@ const file_contracts_shipment_v1_shipment_events_proto_rawDesc = "" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
 	"\vshipment_id\x18\x02 \x01(\tR\n" +
 	"shipmentId\x12#\n" +
-	"\rdelay_minutes\x18\x03 \x01(\x05R\fdelayMinutes\x12\x16\n" +
+	"\rdelay_minutes\x18\x03 \x01(\x03R\fdelayMinutes\x12\x16\n" +
 	"\x06reason\x18\x04 \x01(\tR\x06reason\"\x99\x01\n" +
 	"\x10ShipmentPickedUp\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
@@ -688,12 +765,16 @@ const file_contracts_shipment_v1_shipment_events_proto_rawDesc = "" +
 	"\x11ShipmentInTransit\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
 	"\vshipment_id\x18\x02 \x01(\tR\n" +
-	"shipmentId\"\x91\x01\n" +
+	"shipmentId\"\xfd\x01\n" +
 	"\x11ShipmentDelivered\x124\n" +
-	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
-	"\vshipment_id\x18\x02 \x01(\tR\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x19\n" +
+	"\border_id\x18\x02 \x01(\tR\aorderId\x12!\n" +
+	"\fwarehouse_id\x18\x03 \x01(\tR\vwarehouseId\x12\x10\n" +
+	"\x03sku\x18\x04 \x01(\tR\x03sku\x12\x1a\n" +
+	"\bquantity\x18\x05 \x01(\x03R\bquantity\x12\x1f\n" +
+	"\vshipment_id\x18\x06 \x01(\tR\n" +
 	"shipmentId\x12%\n" +
-	"\x0edestination_id\x18\x03 \x01(\tR\rdestinationId\"\x99\x01\n" +
+	"\x0edestination_id\x18\a \x01(\tR\rdestinationId\"\x99\x01\n" +
 	"\x10ShipmentReturned\x124\n" +
 	"\bmetadata\x18\x01 \x01(\v2\x18.common.v1.EventMetadataR\bmetadata\x12\x1f\n" +
 	"\vshipment_id\x18\x02 \x01(\tR\n" +

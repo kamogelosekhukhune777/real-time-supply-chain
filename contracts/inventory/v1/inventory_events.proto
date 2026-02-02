@@ -13,18 +13,23 @@ message InventoryUpdated {
   string warehouse_id = 2;
   string sku = 3;
 
-  int32 quantity_available = 4;
-  int32 quantity_reserved = 5;
-  int32 quantity_incoming = 6;
+  int64 quantity_available = 4;
+  int64 quantity_reserved = 5;
+  int64 quantity_incoming = 6;
 
   enum UpdateReason {
     UPDATE_REASON_UNSPECIFIED = 0;
     ORDER_PLACED = 1;
     ORDER_CANCELLED = 2;
-    SHIPMENT_RECEIVED = 3;
-    SHIPMENT_DISPATCHED = 4;
-    REALLOCATION = 5;
-    MANUAL_ADJUSTMENT = 6;
+    SHIPMENT_CREATED = 3;
+    SHIPMENT_RECEIVED = 4;
+    SHIPMENT_DISPATCHED = 5;
+    SHIPMENT_CANCELLED = 6;
+    SHIPMENT_DELIVERED = 7;
+    REALLOCATION = 8;
+    MANUAL_ADJUSTMENT = 9;
+    RESERVATION = 10;
+    RELEASE = 11;
   }
 
   UpdateReason reason = 7;
@@ -37,8 +42,8 @@ message InventoryLowStock {
   string warehouse_id = 2;
   string sku = 3;
 
-  int32 quantity_available = 4;
-  int32 threshold = 5;
+  int64 quantity_available = 4;
+  int64 threshold = 5;
 
   enum Severity {
     SEVERITY_UNSPECIFIED = 0;
@@ -67,10 +72,10 @@ message InventoryReserved {
   string reservation_id = 4;
   string order_id = 5;
 
-  int32 reserved_quantity = 6;
+  int64 reserved_quantity = 6;
 
-  int32 quantity_available_after = 7;
-  int32 quantity_reserved_after = 8;
+  int64 quantity_available_after = 7;
+  int64 quantity_reserved_after = 8;
 }
 
 //Emitted when a reservation is released (cancelled / expired)
@@ -83,10 +88,10 @@ message InventoryReservationReleased {
   string reservation_id = 4;
   string order_id = 5;
 
-  int32 released_quantity = 6;
+  int64 released_quantity = 6;
 
-  int32 quantity_available_after = 7;
-  int32 quantity_reserved_after = 8;
+  int64 quantity_available_after = 7;
+  int64 quantity_reserved_after = 8;
 
   enum ReleaseReason {
     RELEASE_REASON_UNSPECIFIED = 0;
@@ -103,11 +108,9 @@ message InventoryReallocated {
   common.v1.EventMetadata metadata = 1;
 
   string sku = 2;
-
   string from_warehouse_id = 3;
   string to_warehouse_id = 4;
-
-  int32 quantity = 5;
+  int64 quantity = 5;
 
   enum ReallocationReason {
     REALLOCATION_REASON_UNSPECIFIED = 0;
@@ -124,9 +127,27 @@ message InventoryReallocated {
 // reservation attempt failed
 message InventoryReservationFailed {
   common.v1.EventMetadata metadata = 1;
+
   string warehouse_id = 2;
   string sku = 3;
+  string order_id = 4;
+  int64 requested_quantity = 5;
+  int64 available_quantity = 6;
+
+  enum FailureReason {
+    FAILURE_REASON_UNSPECIFIED = 0;
+    INSUFFICIENT_STOCK = 1;
+    SKU_NOT_FOUND = 2;
+    WAREHOUSE_NOT_FOUND = 3;
+    INVENTORY_LOCKED = 4;
+    CONCURRENT_MODIFICATION = 5;
+    INVENTORY_SERVICE_UNAVAILABLE = 6;
+    INVALID_REQUEST = 7;
+  }
+
+  FailureReason reason = 7;
 }
+
 
 // inventory shortage detected
 message InventoryShortageDetected {
