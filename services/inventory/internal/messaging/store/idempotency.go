@@ -1,6 +1,5 @@
 package store
 
-
 import (
 	"context"
 	"time"
@@ -23,4 +22,10 @@ func (r *RedisIdempotencyStore) Seen(ctx context.Context, id string) (bool, erro
 
 func (r *RedisIdempotencyStore) Mark(ctx context.Context, id string, ttl time.Duration) error {
 	return r.rdb.Set(ctx, "evt:"+id, "1", ttl).Err()
+}
+
+func (r *RedisIdempotencyStore) TryClaim(ctx context.Context, id string, ttl time.Duration) (bool, error) {
+    // SetNX returns true if the key was set, false if it already existed.
+    // This is atomic—no other process can slip in between the check and the set.
+    return r.rdb.SetNX(ctx, "evt:"+id, "1", ttl).Result()
 }
