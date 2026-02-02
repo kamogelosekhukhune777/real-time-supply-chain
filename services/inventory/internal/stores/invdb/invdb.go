@@ -29,7 +29,7 @@ func NewStore(log *logger.Logger, db *sqlx.DB) *Store {
 
 // NewWithTx constructs a new Store value replacing the sqlx DB
 // value with a sqlx DB value that is currently inside a transaction.
-func (s *Store) NewWithTx(tx sqldb.CommitRollbacker) (*Store, error) {
+func (s *Store) NewWithTx(tx sqldb.CommitRollbacker) (domain.Storer, error) {
 	ec, err := sqldb.GetExtContext(tx)
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ func (s *Store) GetInventory(ctx context.Context, locationID string, sku string)
 	return toBusInventory(dbInv)
 }
 
-func (s *Store) CreateInventory(ctx context.Context, inv domain.Inventory) (domain.Inventory, error) {
+func (s *Store) CreateInventory(ctx context.Context, inv domain.Inventory) error {
 	const q = `
 	INSERT INTO inventory
 		( location_id, sku, on_hand, reserved, incoming, updated_at)
@@ -79,13 +79,13 @@ func (s *Store) CreateInventory(ctx context.Context, inv domain.Inventory) (doma
 		(:location_id, :sku, :on_hand, :reserved, :incoming, :updated_at)`
 
 	if err := sqldb.NamedExecContext(ctx, s.log, s.db, q, toDBInventory(inv)); err != nil {
-		return domain.Inventory{}, fmt.Errorf("named exec context: %w", err)
+		return fmt.Errorf("named exec context: %w", err)
 	}
 
-	return inv, nil
+	return nil
 }
 
-func (s *Store) UpdateInventory(ctx context.Context, inv domain.Inventory) (domain.Inventory, error) {
+func (s *Store) UpdateInventory(ctx context.Context, inv domain.Inventory) error {
 	const q = `
 	UPDATE
 		inventory
@@ -100,10 +100,10 @@ func (s *Store) UpdateInventory(ctx context.Context, inv domain.Inventory) (doma
 		location_id = :location_id AND sku = :sku`
 
 	if err := sqldb.NamedExecContext(ctx, s.log, s.db, q, toDBInventory(inv)); err != nil {
-		return domain.Inventory{}, fmt.Errorf("named exec context: %w", err)
+		return fmt.Errorf("named exec context: %w", err)
 	}
 
-	return inv, nil
+	return nil
 }
 
 func (s *Store) DeleteInventory(ctx context.Context, inv domain.Inventory) error {

@@ -9,9 +9,9 @@ import (
 type inventoryDB struct {
 	LocationID string    `db:"location_id"`
 	SKU        string    `db:"sku"`
-	OnHand     int       `db:"on_hand"`
-	Reserved   int       `db:"reserved"`
-	Incoming   int       `db:"incoming"`
+	OnHand     int64     `db:"on_hand"`
+	Reserved   int64     `db:"reserved"`
+	Incoming   int64     `db:"incoming"`
 	UpdatedAt  time.Time `db:"updated_at"`
 }
 

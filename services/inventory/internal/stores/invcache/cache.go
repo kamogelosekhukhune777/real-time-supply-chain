@@ -20,16 +20,12 @@ type Store struct {
 	cache  *redis.Client
 }
 
-func NewStore(log *logger.Logger, url string, storer domain.Storer) (*Store, error) {
-	cache := redis.NewClient(&redis.Options{
-		Addr: url,
-	})
-
+func NewStore(log *logger.Logger, cache *redis.Client, storer domain.Storer) *Store{
 	return &Store{
 		log:    log,
 		storer: storer,
 		cache:  cache,
-	}, nil
+	}
 }
 
 func (s *Store) NewWithTx(tx sqldb.CommitRollbacker) (domain.Storer, error) {
@@ -144,9 +140,9 @@ func (s *Store) readCache(ctx context.Context, locationID, sku string) (*domain.
 	return &domain.Inventory{
 		LocationID: locationID,
 		SKU:        sku,
-		OnHand:     onHand,
-		Reserved:   reserved,
-		Incoming:   incoming,
+		OnHand:     int64(onHand),
+		Reserved:   int64(reserved),
+		Incoming:   int64(incoming),
 		UpdatedAt:  time.Unix(updatedAtUnix, 0),
 	}, nil
 }
