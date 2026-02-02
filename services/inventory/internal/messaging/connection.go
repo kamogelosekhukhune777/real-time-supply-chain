@@ -10,7 +10,7 @@ import (
 )
 
 type Config struct {
-	Log           logger.Logger
+	Log           *logger.Logger
 	URL           string
 	ConnTimeout   time.Duration
 	MaxReconnects int
@@ -55,18 +55,26 @@ func NewNATS(ctx context.Context, cfg Config) (*nats.Conn, nats.JetStreamContext
 }
 
 func EnsureStream(js nats.JetStreamContext, env string) error {
+	streamName := "EVENTS"
+	// Fetch current state first to avoid accidental overrides
+	info, err := js.StreamInfo(streamName)
+
 	cfg := &nats.StreamConfig{
-		Name:     "EVENTS",
+		Name:     streamName,
 		Subjects: []string{env + ".>"},
 		Storage:  nats.FileStorage,
 		MaxAge:   72 * time.Hour,
 	}
 
-	if _, err := js.StreamInfo(cfg.Name); err == nil {
-		_, err = js.UpdateStream(cfg)
-		return err
+	if err == nil {
+		// Only update if something actually changed to save IO
+		if info.Config.MaxAge != cfg.MaxAge {
+			_, err = js.UpdateStream(cfg)
+			return err
+		}
+		return nil
 	}
 
-	_, err := js.AddStream(cfg)
+	_, err = js.AddStream(cfg)
 	return err
 }

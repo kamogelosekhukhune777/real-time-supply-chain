@@ -10,6 +10,7 @@ const (
 
 	OrderPlaced   = "order.placed"
 	OrderCanceled = "order.cancelled"
+	OrderShipped  = "order.shipped"
 
 	DemandReorderTriggered = "demand.reorder.triggered"
 )
