@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  nats:
+    image: nats:2.10
+    container_name: supplychain-nats
+    command: >
+      -js
+      -m 8222
+    ports:
+      - "4222:4222" # Client connections
+      - "8222:8222" # HTTP monitoring
+    volumes:
+      - nats-data:/data
+    restart: unless-stopped
+
+  # -----------------------
+  # Inventory Datastores
+  # -----------------------
+  inventory-postgres:
+    image: postgres:16
+    container_name: inventory-postgres
+    environment:
+      POSTGRES_DB: inventory
+      POSTGRES_USER: inventory
+      POSTGRES_PASSWORD: inventory
+    ports:
+      - "5433:5432"
+    volumes:
+      - inventory-postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  inventory-redis:
+    image: redis:7.4-alpine
+    container_name: inventory-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - inventory-redis-data:/data
+    restart: unless-stopped
+
+  #services
+  #inventory service domain
+  
+volumes:
+  nats-data:
+
+  inventory-postgres-data:
+  inventory-redis-data:

@@ -1,0 +1,48 @@
+# Binary output
+bin/
+out/
+dist/
+
+# Dependencies
+# Keep vendor/ if you use it, otherwise ignore it
+# vendor/
+
+# Build artifacts and caches
+obj/
+*.test
+*.out
+*.exe
+
+# Git and version control
+.git
+.gitignore
+.gitattributes
+
+# Environment and secrets
+.env
+*.pem
+*.key
+id_rsa
+secrets.yaml
+
+# IDE and Editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker-related files (not needed inside the image)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation and tests (optional, helps reduce context size)
+docs/
+*_test.go
+
+
+#Text file
+.*txt
+
+#frontend
+frontend/
