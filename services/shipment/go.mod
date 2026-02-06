@@ -3,7 +3,9 @@ module github.com/kamogelosekhukhune777/real-time-supply-chain/services/shipment
 go 1.25.5
 
 require (
+	github.com/ardanlabs/darwin/v3 v3.3.1
 	github.com/google/uuid v1.6.0
+	github.com/jmoiron/sqlx v1.4.0
 	github.com/kamogelosekhukhune777/real-time-supply-chain v0.0.0-20260204132631-8e8af3becf0e
 )
 
@@ -17,7 +19,6 @@ require (
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/jackc/pgx/v5 v5.8.0 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
-	github.com/jmoiron/sqlx v1.4.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel v1.39.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.39.0 // indirect
