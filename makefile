@@ -83,3 +83,12 @@ deps-cleancache:
 
 list:
 	go list -mod=mod all
+
+# ============================================================================================================================================
+#Run
+
+shipment:
+	go run services/shipment/cmd/shipment/main.go
+
+inventory:
+	go run services/inventory/cmd/inventorymain.go
