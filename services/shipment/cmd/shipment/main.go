@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"errors"
 	"expvar"
 	"fmt"
@@ -17,6 +18,10 @@ import (
 	"github.com/kamogelosekhukhune777/real-time-supply-chain/pkg/sdks/sqldb"
 	"github.com/kamogelosekhukhune777/real-time-supply-chain/services/shipment/internal/domain/shipment"
 	"github.com/kamogelosekhukhune777/real-time-supply-chain/services/shipment/internal/domain/shipment/stores/shipmentdb"
+	shipmentcache "github.com/kamogelosekhukhune777/real-time-supply-chain/services/shipment/internal/domain/shipment/stores/shpimentcache"
+	"github.com/kamogelosekhukhune777/real-time-supply-chain/services/shipment/internal/messaging"
+	"github.com/kamogelosekhukhune777/real-time-supply-chain/services/shipment/internal/messaging/idempotencystore"
+	"github.com/redis/go-redis/v9"
 )
 
 var buildTag = "develop"
@@ -49,6 +54,17 @@ func run(ctx context.Context, log *logger.Logger) error {
 
 	cfg := struct {
 		conf.Version
+		Redis
+		NATS struct {
+			Scheme        string        `conf:"default:nats"`
+			Hosts         []string      `conf:"default:localhost:4222"`
+			Username      string        `conf:"default:"`
+			Password      string        `conf:"default:,mask"`
+			Token         string        `conf:"default:,mask"`
+			ConnTimeout   time.Duration `conf:"default:20s"`
+			ReconnectWait time.Duration `conf:"default:20s"`
+			MaxReconnects int           `conf:"default:9"`
+		}
 		DB struct {
 			User         string `conf:"default:inventory"`
 			Password     string `conf:"default:inventory,mask"`
@@ -58,7 +74,12 @@ func run(ctx context.Context, log *logger.Logger) error {
 			MaxOpenConns int    `conf:"default:0"`
 			DisableTLS   bool   `conf:"default:true"`
 		}
-		ShutdownTimeout time.Duration `conf:"default:20s"`
+		Tempo struct {
+			Host            string        `conf:"default:tempo:4317"`
+			ServiceName     string        `conf:"default:sales"`
+			Probability     float64       `conf:"default:0.05"`
+			ShutdownTimeout time.Duration `conf:"default:20s"`
+		}
 	}{
 		Version: conf.Version{
 			Build: buildTag,
@@ -113,9 +134,70 @@ func run(ctx context.Context, log *logger.Logger) error {
 	defer db.Close()
 
 	// ---------------------------------------------------------------------------------------------------------------------------
+	// Redis
+
+	rdb, err := newRedis(cfg.Redis)
+	if err != nil {
+		return fmt.Errorf("redis client:%w", err)
+	}
+	defer rdb.Close()
+
+	// -------------------------------------------------------------------------
+	// Start Tracing Support
+
+	log.Info(ctx, "startup", "status", "initializing tracing support")
+
+	traceProvider, teardown, err := otel.InitTracing(otel.Config{
+		ServiceName: cfg.Tempo.ServiceName,
+		Host:        cfg.Tempo.Host,
+		Probability: cfg.Tempo.Probability,
+	})
+	if err != nil {
+		return fmt.Errorf("starting tracing: %w", err)
+	}
+
+	defer teardown(context.Background())
+
+	tracer := traceProvider.Tracer(cfg.Tempo.ServiceName)
+
+	// ---------------------------------------------------------------------------------------------------------------------------
+	// Messaging (NATS + JetStream)
+
+	nCfg := messaging.Config{
+		Log:           log,
+		ClientName:    "shipment-service",
+		Scheme:        cfg.NATS.Scheme,
+		Hosts:         cfg.NATS.Hosts,
+		Username:      cfg.NATS.Username,
+		Password:      cfg.NATS.Password,
+		Token:         cfg.NATS.Token,
+		ConnTimeout:   cfg.NATS.ConnTimeout,
+		ReconnectWait: cfg.NATS.ReconnectWait,
+		MaxReconnects: cfg.NATS.MaxReconnects,
+	}
+
+	nc, js, err := messaging.NewNATS(ctx, nCfg)
+	if err != nil {
+		return fmt.Errorf("nats connect :%w", err)
+	}
+	defer nc.Drain()
+
+	env := "prod"
+	env = buildTag
+	if err := messaging.EnsureStream(js, env); err != nil {
+		return fmt.Errorf("Could not ensure JetStream: %w", err)
+	}
+
+	// ---------------------------------------------------------------------------------------------------------------------------
+	// Messaging
+
+	_ = messaging.NewPublisher(log, js, tracer)
+	_ = idempotencystore.NewRedisIdempotencyStore(rdb)
+
+	// ---------------------------------------------------------------------------------------------------------------------------
 	// Domain/Busines
 
-	shipmentStorage := shipmentdb.NewStore(log, db)
+	shipmentStorage := shipmentcache.NewStore(log, rdb, shipmentdb.NewStore(log, db))
 	_ = shipment.NewBusiness(log, shipmentStorage)
 
 	// ---------------------------------------------------------------------------------------------------------------------------
@@ -126,4 +208,34 @@ func run(ctx context.Context, log *logger.Logger) error {
 	<-shutdown
 
 	return nil
+}
+
+type Redis struct {
+	Scheme      string        `conf:"default:redis"`
+	Hosts       []string      `conf:"default:inventory-redis:6379"`
+	Username    string        `conf:"default:"`
+	Password    string        `conf:"default:,mask"`
+	DB          int           `conf:"default:0"`
+	DialTimeout time.Duration `conf:"default:20s"`
+}
+
+func newRedis(cfg Redis) (*redis.Client, error) {
+	opts := &redis.Options{
+		Addr:        cfg.Hosts[0],
+		Username:    cfg.Username,
+		Password:    cfg.Password,
+		DB:          cfg.DB,
+		DialTimeout: cfg.DialTimeout,
+	}
+
+	if cfg.Scheme == "redis" {
+		opts.TLSConfig = &tls.Config{MinVersion: tls.VersionTLS12}
+	}
+
+	rdb := redis.NewClient(opts)
+	if err := rdb.Ping(context.Background()).Err(); err != nil {
+		return nil, err
+	}
+
+	return rdb, nil
 }
